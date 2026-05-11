@@ -7,6 +7,12 @@ document.getElementById("select-screen");
 const home =
 document.getElementById("home");
 
+
+
+// ========================
+// ローディング画面
+// ========================
+
 setTimeout(()=>{
 
   loading.classList.add("hidden");
@@ -15,21 +21,27 @@ setTimeout(()=>{
 
 },2000);
 
-let selectedDragon = "";
+
+
+// ========================
+// モンスター選択
+// ========================
+
+let selectedMonster = "";
 
 document
-.querySelectorAll(".dragon-select")
-.forEach(dragon=>{
+.querySelectorAll(".monster-select")
+.forEach(monster=>{
 
-  dragon.onclick = ()=>{
+  monster.onclick = ()=>{
 
-    selectedDragon =
-    dragon.dataset.dragon;
+    selectedMonster =
+    monster.dataset.monster;
 
     document
-    .getElementById("dragon-image")
+    .getElementById("monster-image")
     .src =
-    `assets/dragons/${selectedDragon}.png`;
+    `assets/monsters/${selectedMonster}.png`;
 
     selectScreen
     .classList.add("hidden");
@@ -38,6 +50,12 @@ document
     .classList.remove("hidden");
   };
 });
+
+
+
+// ========================
+// 基本データ
+// ========================
 
 let time = 25 * 60;
 
@@ -51,8 +69,29 @@ let pomodoroCount = 0;
 
 let streak = 0;
 
+
+
+// ========================
+// HTML取得
+// ========================
+
 const timerDisplay =
 document.getElementById("timer");
+
+const expDisplay =
+document.getElementById("exp");
+
+const levelDisplay =
+document.getElementById("monster-level");
+
+const pomodoroDisplay =
+document.getElementById("pomodoro-count");
+
+
+
+// ========================
+// タイマー表示更新
+// ========================
 
 function updateTimer(){
 
@@ -68,6 +107,12 @@ function updateTimer(){
 
 updateTimer();
 
+
+
+// ========================
+// STARTボタン
+// ========================
+
 document
 .getElementById("start-btn")
 .onclick = ()=>{
@@ -80,6 +125,10 @@ document
 
     updateTimer();
 
+    // ====================
+    // ポモドーロ完了
+    // ====================
+
     if(time <= 0){
 
       clearInterval(timer);
@@ -88,7 +137,11 @@ document
 
       streak++;
 
+      // EXP計算
+
       let gainedExp = 10;
+
+      // 3回ごと2倍
 
       if(streak % 3 === 0){
 
@@ -99,36 +152,44 @@ document
 
       pomodoroCount++;
 
-      document
-      .getElementById("exp")
-      .innerText = exp;
+      // 表示更新
 
-      document
-      .getElementById("pomodoro-count")
-      .innerText =
+      expDisplay.innerText = exp;
+
+      pomodoroDisplay.innerText =
       pomodoroCount;
+
+      // ====================
+      // レベルアップ
+      // ====================
 
       if(exp >= level * 100){
 
         level++;
 
-        document
-        .getElementById("dragon-level")
-        .innerText =
+        levelDisplay.innerText =
         `Lv.${level}`;
+
+        // ==================
+        // 進化
+        // ==================
 
         if(level >= 5){
 
           document
-          .getElementById("dragon-image")
+          .getElementById("monster-image")
           .src =
-          "assets/dragons/evolve1.png";
+          "assets/monsters/evolve1.png";
         }
       }
 
+      // 完了通知
+
       alert(
-        `ポモドーロ完了！ EXP +${gainedExp}`
+        `ポモドーロ完了！\nEXP +${gainedExp}`
       );
+
+      // タイマーリセット
 
       time = 25 * 60;
 
@@ -139,6 +200,12 @@ document
 
 };
 
+
+
+// ========================
+// STOPボタン
+// ========================
+
 document
 .getElementById("stop-btn")
 .onclick = ()=>{
@@ -147,6 +214,12 @@ document
 
   timer = null;
 };
+
+
+
+// ========================
+// RESETボタン
+// ========================
 
 document
 .getElementById("reset-btn")
