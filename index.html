@@ -38,6 +38,7 @@
 
     <div id="plaza">
 
+      <!-- モンスター -->
       <img id="monster-image" src="assets/monsters/sleep.png">
 
       <div id="plaza-ground"></div>
@@ -46,25 +47,24 @@
 
     <h2 id="monster-level">Lv.1</h2>
 
-    <!-- EXPゲージ -->
     <div id="level-bar">
       <div id="level-fill"></div>
     </div>
 
     <p>EXP : <span id="exp">0</span></p>
 
-    <!-- 1行統合 -->
-    <p>
-      今日 <span id="today-count">0</span> / 累計 <span id="total-count">0</span>
-    </p>
+    <p>今日 <span id="today-count">0</span> / 累計 <span id="total-count">0</span></p>
 
     <!-- 砂時計 -->
-    <div id="hourglass-btn">⏳ START</div>
+    <img id="hourglass-btn" src="assets/icons/hourglass.png">
 
   </div>
 
   <!-- タイマー -->
   <div id="timer-screen" class="hidden">
+
+    <!-- 集中エフェクト -->
+    <div id="focus-overlay"></div>
 
     <h1>集中中...</h1>
 
@@ -74,7 +74,9 @@
 
   </div>
 
+  <!-- 音 -->
   <audio id="finish-sound" src="assets/sounds/finish.mp3"></audio>
+  <audio id="bgm" src="assets/sounds/timer.mp3" loop></audio>
 
   <script src="script.js"></script>
 
