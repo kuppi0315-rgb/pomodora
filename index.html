@@ -38,7 +38,6 @@
 
     <div id="plaza">
 
-      <!-- モンスター -->
       <img id="monster-image" src="assets/monsters/sleep.png">
 
       <div id="plaza-ground"></div>
@@ -56,25 +55,39 @@
     <p>今日 <span id="today-count">0</span> / 累計 <span id="total-count">0</span></p>
 
     <!-- 砂時計 -->
-    <img id="hourglass-btn" src="assets/icons/hourglass.png">
+    <div id="hourglass-btn">
+
+      <div class="hourglass">
+
+        <div class="glass top">
+          <div class="sand sand-top"></div>
+        </div>
+
+        <div class="middle"></div>
+
+        <div class="glass bottom">
+          <div class="sand sand-bottom"></div>
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
 
   <!-- タイマー -->
   <div id="timer-screen" class="hidden">
 
-    <!-- 集中エフェクト -->
     <div id="focus-overlay"></div>
 
     <h1>集中中...</h1>
 
-    <div id="timer">00:01</div>
+    <div id="timer">00:10</div>
 
     <button id="stop-btn">中断</button>
 
   </div>
 
-  <!-- 音 -->
   <audio id="finish-sound" src="assets/sounds/finish.mp3"></audio>
   <audio id="bgm" src="assets/sounds/timer.mp3" loop></audio>
 
