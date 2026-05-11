@@ -1,119 +1,54 @@
-const loading = document.getElementById("loading");
-const selectScreen = document.getElementById("select-screen");
-const home = document.getElementById("home");
-const timerScreen = document.getElementById("timer-screen");
+const btn = document.getElementById("hourglass-btn");
+
+const sandTop = document.querySelector(".sand-top");
+const sandBottom = document.querySelector(".sand-bottom");
 
 const bgm = document.getElementById("bgm");
-const focus = document.getElementById("focus-overlay");
-const monsterImg = document.getElementById("monster-image");
 
-let selectedMonster = localStorage.getItem("monster") || "";
-
-let exp = Number(localStorage.getItem("exp")) || 0;
-let level = Number(localStorage.getItem("level")) || 1;
-let total = Number(localStorage.getItem("total")) || 0;
-let today = Number(localStorage.getItem("today")) || 0;
-
-let time = 10; // 🔥 10秒テスト
+let time = 10;
 let timer = null;
-let streak = 0;
 
-/* =====================
-   ロード
-===================== */
+let total = 0;
+let today = 0;
 
-setTimeout(() => {
-
-  loading.classList.add("hidden");
-
-  if (selectedMonster) {
-    showHome();
-  } else {
-    selectScreen.classList.remove("hidden");
-  }
-
-}, 1000);
-
-/* =====================
-   選択
-===================== */
-
-document.querySelectorAll(".monster-select").forEach(m => {
-  m.onclick = () => {
-    selectedMonster = m.dataset.monster;
-    localStorage.setItem("monster", selectedMonster);
-    showHome();
-  };
-});
-
-/* =====================
-   ホーム
-===================== */
-
-function showHome() {
-
-  selectScreen.classList.add("hidden");
-  timerScreen.classList.add("hidden");
-  home.classList.remove("hidden");
-
-  bgm.pause();
-  updateUI();
-}
-
-/* =====================
-   UI
-===================== */
-
-function updateUI() {
-
-  monsterImg.src = `assets/monsters/${selectedMonster}.png`;
-
-  document.getElementById("exp").innerText = exp;
-  document.getElementById("today-count").innerText = today;
-  document.getElementById("total-count").innerText = total;
-}
-
-/* =====================
+/* =========================
    砂時計クリック
-===================== */
+========================= */
 
-document.getElementById("hourglass-btn").onclick = (e) => {
+btn.onclick = () => {
 
-  // 回転アニメ
-  const btn = document.getElementById("hourglass-btn");
+  /* 回転リセット */
   btn.classList.remove("rotate");
-  void btn.offsetWidth; // 再トリガー
+  void btn.offsetWidth;
   btn.classList.add("rotate");
 
-  home.classList.add("hidden");
-  timerScreen.classList.remove("hidden");
+  /* 砂アニメ完全リセット */
+  sandTop.classList.remove("run");
+  sandBottom.classList.remove("run");
 
-  startFocusMode();
+  void sandTop.offsetWidth;
+
+  sandTop.classList.add("run");
+  sandBottom.classList.add("run");
+
+  /* UI切替 */
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("timer-screen").classList.remove("hidden");
+
   startTimer();
 };
 
-/* =====================
-   集中モード
-===================== */
-
-function startFocusMode(){
-
-  focus.classList.add("focus-active");
-
-  monsterImg.classList.add("sleeping");
-
-  setTimeout(() => {
-    focus.classList.remove("focus-active");
-  }, 1000);
-}
-
-/* =====================
+/* =========================
    タイマー（10秒）
-===================== */
+========================= */
 
-function startTimer() {
+function startTimer(){
+
+  clearInterval(timer);
 
   time = 10;
+
+  document.getElementById("timer").innerText = "00:10";
 
   bgm.currentTime = 0;
   bgm.play();
@@ -125,56 +60,40 @@ function startTimer() {
     document.getElementById("timer").innerText =
       "00:" + String(time).padStart(2,"0");
 
-    if (time <= 0) {
+    if(time <= 0){
       clearInterval(timer);
       complete();
     }
 
-  }, 1000);
+  },1000);
 }
 
-/* =====================
+/* =========================
    完了
-===================== */
+========================= */
 
-function complete() {
+function complete(){
 
   bgm.pause();
 
-  streak++;
-
-  let gain = 10;
-
-  if (streak % 3 === 0) gain *= 2;
-
-  exp += gain;
-  today++;
   total++;
+  today++;
 
-  if (exp >= level * 100) level++;
+  document.getElementById("finish").play();
 
-  localStorage.setItem("exp", exp);
-  localStorage.setItem("level", level);
-  localStorage.setItem("today", today);
-  localStorage.setItem("total", total);
-
-  document.getElementById("finish-sound").play();
-
-  monsterImg.classList.remove("sleeping");
-
-  showHome();
+  document.getElementById("home").classList.remove("hidden");
+  document.getElementById("timer-screen").classList.add("hidden");
 }
 
-/* =====================
+/* =========================
    中断
-===================== */
+========================= */
 
-document.getElementById("stop-btn").onclick = () => {
+document.getElementById("stop").onclick = () => {
 
   clearInterval(timer);
   bgm.pause();
 
-  monsterImg.classList.remove("sleeping");
-
-  showHome();
+  document.getElementById("home").classList.remove("hidden");
+  document.getElementById("timer-screen").classList.add("hidden");
 };
