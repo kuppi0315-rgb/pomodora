@@ -1,3 +1,44 @@
+const loading =
+document.getElementById("loading");
+
+const selectScreen =
+document.getElementById("select-screen");
+
+const home =
+document.getElementById("home");
+
+setTimeout(()=>{
+
+  loading.classList.add("hidden");
+
+  selectScreen.classList.remove("hidden");
+
+},2000);
+
+let selectedDragon = "";
+
+document
+.querySelectorAll(".dragon-select")
+.forEach(dragon=>{
+
+  dragon.onclick = ()=>{
+
+    selectedDragon =
+    dragon.dataset.dragon;
+
+    document
+    .getElementById("dragon-image")
+    .src =
+    `assets/dragons/${selectedDragon}.png`;
+
+    selectScreen
+    .classList.add("hidden");
+
+    home
+    .classList.remove("hidden");
+  };
+});
+
 let time = 25 * 60;
 
 let timer = null;
@@ -6,19 +47,12 @@ let exp = 0;
 
 let level = 1;
 
-let count = 0;
+let pomodoroCount = 0;
+
+let streak = 0;
 
 const timerDisplay =
 document.getElementById("timer");
-
-const expDisplay =
-document.getElementById("exp");
-
-const levelDisplay =
-document.getElementById("level");
-
-const countDisplay =
-document.getElementById("count");
 
 function updateTimer(){
 
@@ -34,12 +68,13 @@ function updateTimer(){
 
 updateTimer();
 
-document.getElementById("start")
-.onclick = () => {
+document
+.getElementById("start-btn")
+.onclick = ()=>{
 
-  if(timer !== null) return;
+  if(timer) return;
 
-  timer = setInterval(() => {
+  timer = setInterval(()=>{
 
     time--;
 
@@ -51,24 +86,49 @@ document.getElementById("start")
 
       timer = null;
 
-      exp += 10;
+      streak++;
 
-      count++;
+      let gainedExp = 10;
 
-      expDisplay.innerText = exp;
+      if(streak % 3 === 0){
 
-      countDisplay.innerText = count;
+        gainedExp *= 2;
+      }
+
+      exp += gainedExp;
+
+      pomodoroCount++;
+
+      document
+      .getElementById("exp")
+      .innerText = exp;
+
+      document
+      .getElementById("pomodoro-count")
+      .innerText =
+      pomodoroCount;
 
       if(exp >= level * 100){
 
         level++;
 
-        levelDisplay.innerText =
+        document
+        .getElementById("dragon-level")
+        .innerText =
         `Lv.${level}`;
 
+        if(level >= 5){
+
+          document
+          .getElementById("dragon-image")
+          .src =
+          "assets/dragons/evolve1.png";
+        }
       }
 
-      alert("ポモドロ完了！");
+      alert(
+        `ポモドーロ完了！ EXP +${gainedExp}`
+      );
 
       time = 25 * 60;
 
@@ -79,17 +139,18 @@ document.getElementById("start")
 
 };
 
-document.getElementById("stop")
-.onclick = () => {
+document
+.getElementById("stop-btn")
+.onclick = ()=>{
 
   clearInterval(timer);
 
   timer = null;
-
 };
 
-document.getElementById("reset")
-.onclick = () => {
+document
+.getElementById("reset-btn")
+.onclick = ()=>{
 
   clearInterval(timer);
 
@@ -98,5 +159,4 @@ document.getElementById("reset")
   time = 25 * 60;
 
   updateTimer();
-
 };
