@@ -6,105 +6,68 @@ body{
   text-align:center;
 }
 
-.hidden{display:none;}
+.hidden{
+  display:none;
+}
+
+/* =====================
+   ロゴ
+===================== */
 
 #logo{
-  color:#4caf50;
   font-size:40px;
+  color:#4caf50;
+  margin-top:40px;
 }
 
-/* モンスター */
+/* =====================
+   モンスター（元サイズ）
+===================== */
+
 #monster{
-  width:200px;
+  width:180px;
+  margin-top:20px;
 }
 
-/* =========================
+/* =====================
+   テキスト
+===================== */
+
+p{
+  font-size:18px;
+}
+
+/* =====================
    砂時計
-========================= */
+===================== */
 
 #hourglass-btn{
-  width:220px;
-  height:260px;
+  width:160px;
   margin:40px auto;
+  display:block;
   cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  transition:0.2s;
 }
 
-/* 回転 */
-.rotate{
-  animation:rotateHourglass 0.8s ease;
+#hourglass-btn:active{
+  transform:scale(0.95);
 }
 
-@keyframes rotateHourglass{
-  0%{transform:rotate(0deg);}
-  100%{transform:rotate(180deg);}
-}
-
-/* 本体 */
-.hourglass{
-  width:120px;
-  height:200px;
-  position:relative;
-}
-
-/* ガラス */
-.glass{
-  width:120px;
-  height:90px;
-  border:3px solid white;
-  overflow:hidden;
-  position:relative;
-}
-
-.top{
-  border-bottom:none;
-  border-radius:60px 60px 0 0;
-}
-
-.bottom{
-  border-top:none;
-  border-radius:0 0 60px 60px;
-}
-
-/* 中央 */
-.middle{
-  width:10px;
-  height:20px;
-  background:white;
-  margin:auto;
-}
-
-/* 砂 */
-.sand{
-  width:100%;
-  background:#f5d76e;
-}
-
-/* ★アニメはJSで付ける */
-.sand-top.run{
-  animation:fallTop 10s linear forwards;
-}
-
-.sand-bottom.run{
-  animation:fallBottom 10s linear forwards;
-}
-
-@keyframes fallTop{
-  0%{height:100%;}
-  100%{height:0%;}
-}
-
-@keyframes fallBottom{
-  0%{height:0%;}
-  100%{height:100%;}
-}
-
-/* =========================
+/* =====================
    タイマー
-========================= */
+===================== */
 
 #timer{
-  font-size:80px;
+  font-size:70px;
+  margin-top:30px;
+}
+
+button{
+  padding:12px 24px;
+  font-size:16px;
+  margin-top:20px;
+  background:#4caf50;
+  color:white;
+  border:none;
+  border-radius:10px;
 }
