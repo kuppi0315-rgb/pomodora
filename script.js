@@ -14,7 +14,7 @@ let level = Number(localStorage.getItem("level")) || 1;
 let total = Number(localStorage.getItem("total")) || 0;
 let today = Number(localStorage.getItem("today")) || 0;
 
-let time = 1;
+let time = 10; // 🔥 10秒テスト
 let timer = null;
 let streak = 0;
 
@@ -57,7 +57,6 @@ function showHome() {
   home.classList.remove("hidden");
 
   bgm.pause();
-
   updateUI();
 }
 
@@ -78,7 +77,13 @@ function updateUI() {
    砂時計クリック
 ===================== */
 
-document.getElementById("hourglass-btn").onclick = () => {
+document.getElementById("hourglass-btn").onclick = (e) => {
+
+  // 回転アニメ
+  const btn = document.getElementById("hourglass-btn");
+  btn.classList.remove("rotate");
+  void btn.offsetWidth; // 再トリガー
+  btn.classList.add("rotate");
 
   home.classList.add("hidden");
   timerScreen.classList.remove("hidden");
@@ -88,14 +93,14 @@ document.getElementById("hourglass-btn").onclick = () => {
 };
 
 /* =====================
-   集中モード演出
+   集中モード
 ===================== */
 
 function startFocusMode(){
 
   focus.classList.add("focus-active");
 
-  monsterImg.classList.add("sleeping"); // 目を閉じる
+  monsterImg.classList.add("sleeping");
 
   setTimeout(() => {
     focus.classList.remove("focus-active");
@@ -103,12 +108,12 @@ function startFocusMode(){
 }
 
 /* =====================
-   タイマー
+   タイマー（10秒）
 ===================== */
 
 function startTimer() {
 
-  time = 1;
+  time = 10;
 
   bgm.currentTime = 0;
   bgm.play();
@@ -117,7 +122,8 @@ function startTimer() {
 
     time--;
 
-    document.getElementById("timer").innerText = "00:0" + time;
+    document.getElementById("timer").innerText =
+      "00:" + String(time).padStart(2,"0");
 
     if (time <= 0) {
       clearInterval(timer);
