@@ -37,7 +37,6 @@ body{
   justify-content:center;
   gap:25px;
   margin-top:70px;
-  flex-wrap:wrap;
 }
 
 .monster-select{
@@ -46,11 +45,6 @@ body{
   padding:15px;
   border-radius:20px;
   cursor:pointer;
-  transition:0.2s;
-}
-
-.monster-select:hover{
-  transform:scale(1.08);
 }
 
 /* ホーム */
@@ -66,7 +60,8 @@ body{
 }
 
 #monster-image{
-  width:220px;
+  width:240px;
+  transition:0.3s;
   animation:float 3s infinite ease-in-out;
 }
 
@@ -79,28 +74,22 @@ body{
   filter:blur(2px);
 }
 
-/* 浮遊 */
 @keyframes float{
   0%{transform:translateY(0);}
   50%{transform:translateY(-10px);}
   100%{transform:translateY(0);}
 }
 
-/* ステータス */
-p{
-  font-size:20px;
-}
-
-/* =======================
-   ★砂時計（ここ重要修正）
-======================= */
+/* =========================
+   ★砂時計（超強化）
+========================= */
 
 #hourglass-btn{
 
-  width:220px;
-  height:80px;
+  width:280px;
+  height:120px;
 
-  margin:30px auto;
+  margin:40px auto;
 
   background:#4caf50;
 
@@ -108,21 +97,22 @@ p{
   align-items:center;
   justify-content:center;
 
-  font-size:28px;
+  font-size:36px;
+  font-weight:bold;
 
-  border-radius:18px;
+  border-radius:22px;
 
   cursor:pointer;
 
-  user-select:none;
-
-  box-shadow:0 0 15px rgba(0,0,0,0.6);
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
 
   transition:0.2s;
+
+  user-select:none;
 }
 
 #hourglass-btn:hover{
-  transform:scale(1.05);
+  transform:scale(1.08);
 }
 
 #hourglass-btn:active{
@@ -135,7 +125,7 @@ p{
 }
 
 #timer{
-  font-size:90px;
+  font-size:100px;
   font-weight:bold;
 }
 
@@ -144,7 +134,7 @@ button{
   font-size:20px;
   margin-top:30px;
   background:#4caf50;
-  color:white;
   border:none;
   border-radius:12px;
+  color:white;
 }
