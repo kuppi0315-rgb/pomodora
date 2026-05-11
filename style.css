@@ -6,9 +6,7 @@ body{
   text-align:center;
 }
 
-.hidden{
-  display:none;
-}
+.hidden{display:none;}
 
 /* =====================
    ロゴ
@@ -17,24 +15,56 @@ body{
 #logo{
   font-size:40px;
   color:#4caf50;
-  margin-top:40px;
 }
 
 /* =====================
-   モンスター（元サイズ）
+   モンスター（演出対象）
 ===================== */
 
 #monster{
   width:180px;
-  margin-top:20px;
+  margin-top:10px;
+  transition:0.3s;
+}
+
+/* レベルアップ時 */
+.level-up{
+  animation:glow 0.8s ease;
+}
+
+@keyframes glow{
+  0%{filter:brightness(1);}
+  50%{filter:brightness(2) drop-shadow(0 0 20px #4caf50);}
+  100%{filter:brightness(1);}
 }
 
 /* =====================
-   テキスト
+   レベル
 ===================== */
 
-p{
-  font-size:18px;
+#level{
+  font-size:28px;
+  margin:5px;
+}
+
+/* =====================
+   EXPバー
+===================== */
+
+#exp-bar{
+  width:200px;
+  height:10px;
+  background:#333;
+  margin:10px auto;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+#exp-fill{
+  height:100%;
+  width:0%;
+  background:#4caf50;
+  transition:0.3s;
 }
 
 /* =====================
@@ -46,11 +76,6 @@ p{
   margin:40px auto;
   display:block;
   cursor:pointer;
-  transition:0.2s;
-}
-
-#hourglass-btn:active{
-  transform:scale(0.95);
 }
 
 /* =====================
@@ -67,7 +92,7 @@ button{
   font-size:16px;
   margin-top:20px;
   background:#4caf50;
-  color:white;
   border:none;
   border-radius:10px;
+  color:white;
 }
