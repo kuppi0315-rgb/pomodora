@@ -1,102 +1,85 @@
-let time = 25 * 60;
+body{
 
-let timer = null;
+  margin:0;
+  padding:0;
 
-let exp = 0;
+  background:#121212;
 
-let level = 1;
+  color:white;
 
-let count = 0;
+  font-family:sans-serif;
 
-const timerDisplay =
-document.getElementById("timer");
-
-const expDisplay =
-document.getElementById("exp");
-
-const levelDisplay =
-document.getElementById("level");
-
-const countDisplay =
-document.getElementById("count");
-
-function updateTimer(){
-
-  let minutes =
-  Math.floor(time / 60);
-
-  let seconds =
-  time % 60;
-
-  timerDisplay.innerText =
-  `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+  text-align:center;
 }
 
-updateTimer();
+.hidden{
+  display:none;
+}
 
-document.getElementById("start")
-.onclick = () => {
+#loading{
 
-  if(timer !== null) return;
+  margin-top:200px;
+}
 
-  timer = setInterval(() => {
+.dragon-list{
 
-    time--;
+  display:flex;
 
-    updateTimer();
+  justify-content:center;
 
-    if(time <= 0){
+  gap:20px;
 
-      clearInterval(timer);
+  margin-top:50px;
+}
 
-      timer = null;
+.dragon-select{
 
-      exp += 10;
+  width:120px;
 
-      count++;
+  cursor:pointer;
 
-      expDisplay.innerText = exp;
+  transition:0.3s;
+}
 
-      countDisplay.innerText = count;
+.dragon-select:hover{
 
-      if(exp >= level * 100){
+  transform:scale(1.1);
+}
 
-        level++;
+#dragon-image{
 
-        levelDisplay.innerText =
-        `Lv.${level}`;
+  width:240px;
 
-      }
+  margin-top:20px;
+}
 
-      alert("ポモドロ完了！");
+#timer{
 
-      time = 25 * 60;
+  font-size:72px;
 
-      updateTimer();
-    }
+  margin-top:30px;
+}
 
-  },1000);
+button{
 
-};
+  padding:15px 25px;
 
-document.getElementById("stop")
-.onclick = () => {
+  margin:10px;
 
-  clearInterval(timer);
+  border:none;
 
-  timer = null;
+  border-radius:12px;
 
-};
+  background:#4caf50;
 
-document.getElementById("reset")
-.onclick = () => {
+  color:white;
 
-  clearInterval(timer);
+  font-size:20px;
 
-  timer = null;
+  cursor:pointer;
+}
 
-  time = 25 * 60;
+button:hover{
 
-  updateTimer();
-
-};
+  opacity:0.8;
+}
