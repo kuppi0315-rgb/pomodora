@@ -10,49 +10,14 @@
 
 <body>
 
-  <!-- ローディング -->
-  <div id="loading">
-    <h1 id="logo">POMODORA</h1>
-    <p>Loading...</p>
-  </div>
-
-  <!-- 選択 -->
-  <div id="select-screen" class="hidden">
-
-    <h2>モンスターを選択</h2>
-
-    <div class="monster-list">
-
-      <img src="assets/monsters/monster1.png" class="monster-select" data-monster="monster1">
-      <img src="assets/monsters/monster2.png" class="monster-select" data-monster="monster2">
-      <img src="assets/monsters/monster3.png" class="monster-select" data-monster="monster3">
-
-    </div>
-
-  </div>
-
   <!-- ホーム -->
-  <div id="home" class="hidden">
+  <div id="home">
 
-    <h1 id="logo-small">POMODORA</h1>
+    <h1 id="logo">POMODORA</h1>
 
-    <div id="plaza">
+    <img id="monster" src="assets/monsters/monster1.png">
 
-      <img id="monster-image" src="assets/monsters/sleep.png">
-
-      <div id="plaza-ground"></div>
-
-    </div>
-
-    <h2 id="monster-level">Lv.1</h2>
-
-    <div id="level-bar">
-      <div id="level-fill"></div>
-    </div>
-
-    <p>EXP : <span id="exp">0</span></p>
-
-    <p>今日 <span id="today-count">0</span> / 累計 <span id="total-count">0</span></p>
+    <p>今日 <span id="today">0</span> / 累計 <span id="total">0</span></p>
 
     <!-- 砂時計 -->
     <div id="hourglass-btn">
@@ -80,16 +45,15 @@
 
     <div id="focus-overlay"></div>
 
-    <h1>集中中...</h1>
-
+    <h1>集中中</h1>
     <div id="timer">00:10</div>
 
-    <button id="stop-btn">中断</button>
+    <button id="stop">中断</button>
 
   </div>
 
-  <audio id="finish-sound" src="assets/sounds/finish.mp3"></audio>
   <audio id="bgm" src="assets/sounds/timer.mp3" loop></audio>
+  <audio id="finish" src="assets/sounds/finish.mp3"></audio>
 
   <script src="script.js"></script>
 
