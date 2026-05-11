@@ -1,7 +1,11 @@
 body{
+
   margin:0;
+  padding:0;
+
   background:#121212;
   color:white;
+
   font-family:sans-serif;
   text-align:center;
 }
@@ -28,32 +32,105 @@ body{
 
 #monster-image{
   width:230px;
-  transition:0.4s;
-}
-
-/* 目を閉じた状態 */
-.sleeping{
-  filter:brightness(0.7);
-  transform:scale(0.95);
+  transition:0.3s;
 }
 
 /* =====================
-   砂時計（アニメ付き）
+   砂時計（回転アニメ付き）
 ===================== */
 
 #hourglass-btn{
+
   width:220px;
+  height:260px;
+
   margin:40px auto;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
   cursor:pointer;
-  display:block;
-  transition:0.2s;
-  animation:shake 2s infinite ease-in-out;
 }
 
-@keyframes shake{
+/* 回転アニメ */
+.rotate{
+
+  animation:rotateHourglass 0.8s ease-in-out;
+}
+
+@keyframes rotateHourglass{
   0%{transform:rotate(0deg);}
-  50%{transform:rotate(5deg);}
-  100%{transform:rotate(0deg);}
+  100%{transform:rotate(180deg);}
+}
+
+/* 本体 */
+.hourglass{
+
+  width:120px;
+  height:200px;
+
+  position:relative;
+}
+
+/* 上下ガラス */
+.glass{
+
+  width:120px;
+  height:90px;
+
+  border:3px solid white;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.top{
+  border-bottom:none;
+  border-radius:60px 60px 0 0;
+}
+
+.bottom{
+  border-top:none;
+  border-radius:0 0 60px 60px;
+}
+
+/* 真ん中 */
+.middle{
+  width:10px;
+  height:20px;
+  background:white;
+  margin:auto;
+}
+
+/* 砂 */
+.sand{
+  width:100%;
+  background:#f5d76e;
+}
+
+/* 上の砂 */
+.sand-top{
+  height:100%;
+  animation:fallTop 10s linear forwards;
+}
+
+/* 下の砂 */
+.sand-bottom{
+  height:0%;
+  animation:fallBottom 10s linear forwards;
+}
+
+/* 砂アニメ */
+@keyframes fallTop{
+  0%{height:100%;}
+  100%{height:0%;}
+}
+
+@keyframes fallBottom{
+  0%{height:0%;}
+  100%{height:100%;}
 }
 
 /* =====================
