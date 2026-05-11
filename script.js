@@ -1,339 +1,128 @@
-const loading =
-document.getElementById("loading");
+const loading = document.getElementById("loading");
+const selectScreen = document.getElementById("select-screen");
+const home = document.getElementById("home");
+const timerScreen = document.getElementById("timer-screen");
 
-const selectScreen =
-document.getElementById("select-screen");
+let selectedMonster = localStorage.getItem("monster") || "";
 
-const home =
-document.getElementById("home");
+let exp = Number(localStorage.getItem("exp")) || 0;
+let level = Number(localStorage.getItem("level")) || 1;
+let total = Number(localStorage.getItem("total")) || 0;
+let today = Number(localStorage.getItem("today")) || 0;
 
-const timerScreen =
-document.getElementById("timer-screen");
+let time = 1; // ★テスト用1秒
+let timer = null;
+let streak = 0;
 
-
-
-// ========================
-// 保存データ
-// ========================
-
-let selectedMonster =
-localStorage.getItem("monster")
-|| "";
-
-let exp =
-Number(localStorage.getItem("exp"))
-|| 0;
-
-let level =
-Number(localStorage.getItem("level"))
-|| 1;
-
-let totalCount =
-Number(localStorage.getItem("totalCount"))
-|| 0;
-
-let todayCount =
-Number(localStorage.getItem("todayCount"))
-|| 0;
-
-let streak =
-Number(localStorage.getItem("streak"))
-|| 0;
-
-
-
-// ========================
-// ローディング
-// ========================
-
-setTimeout(()=>{
-
+// ロード
+setTimeout(() => {
   loading.classList.add("hidden");
 
-  if(selectedMonster){
-
+  if (selectedMonster) {
     showHome();
-
-  }else{
-
+  } else {
     selectScreen.classList.remove("hidden");
   }
 
-},1500);
+}, 1200);
 
-
-
-// ========================
 // モンスター選択
-// ========================
+document.querySelectorAll(".monster-select").forEach(m => {
+  m.onclick = () => {
 
-document
-.querySelectorAll(".monster-select")
-.forEach(monster=>{
+    selectedMonster = m.dataset.monster;
 
-  monster.onclick = ()=>{
-
-    selectedMonster =
-    monster.dataset.monster;
-
-    localStorage.setItem(
-      "monster",
-      selectedMonster
-    );
+    localStorage.setItem("monster", selectedMonster);
 
     showHome();
   };
 });
 
-
-
-// ========================
 // ホーム表示
-// ========================
-
-function showHome(){
-
-  timerScreen.classList.add("hidden");
-
+function showHome() {
   selectScreen.classList.add("hidden");
-
+  timerScreen.classList.add("hidden");
   home.classList.remove("hidden");
 
   updateUI();
 }
 
-
-
-// ========================
 // UI更新
-// ========================
+function updateUI() {
 
-function updateUI(){
+  document.getElementById("monster-image").src =
+    `assets/monsters/${selectedMonster}.png`;
 
-  document
-  .getElementById("monster-image")
-  .src =
-  `assets/monsters/${selectedMonster}.png`;
+  document.getElementById("exp").innerText = exp;
+  document.getElementById("today-count").innerText = today;
+  document.getElementById("total-count").innerText = total;
 
-  document
-  .getElementById("monster-level")
-  .innerText =
-  `Lv.${level}`;
-
-  document
-  .getElementById("exp")
-  .innerText =
-  exp;
-
-  document
-  .getElementById("today-count")
-  .innerText =
-  todayCount;
-
-  document
-  .getElementById("total-count")
-  .innerText =
-  totalCount;
-
-
-
-  // EXPバー
-
-  let percent =
-  exp % 100;
-
-  document
-  .getElementById("exp-bar")
-  .style.width =
-  `${percent}%`;
-
-
-
-  // 進化
-
-  if(level >= 5){
-
-    document
-    .getElementById("monster-image")
-    .src =
-    "assets/monsters/evolve1.png";
-  }
+  document.getElementById("monster-level").innerText = "Lv." + level;
 }
 
-
-
-// ========================
-// タイマー
-// ========================
-
-// テスト用1秒
-
-let time = 1;
-
-let timer = null;
-
-const timerDisplay =
-document.getElementById("timer");
-
-
-
-function updateTimer(){
-
-  let minutes =
-  Math.floor(time / 60);
-
-  let seconds =
-  time % 60;
-
-  timerDisplay.innerText =
-  `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
-}
-
-
-
-// ========================
-// 砂時計ボタン
-// ========================
-
-document
-.getElementById("hourglass-btn")
-.onclick = ()=>{
+// 砂時計 → タイマー
+document.getElementById("hourglass-btn").onclick = () => {
 
   home.classList.add("hidden");
-
   timerScreen.classList.remove("hidden");
 
-  startPomodoro();
+  startTimer();
 };
 
-
-
-// ========================
-// ポモドーロ開始
-// ========================
-
-function startPomodoro(){
+// タイマー
+function startTimer() {
 
   time = 1;
 
-  updateTimer();
-
-  timer = setInterval(()=>{
+  timer = setInterval(() => {
 
     time--;
 
-    updateTimer();
+    document.getElementById("timer").innerText = "00:0" + time;
 
-    if(time <= 0){
+    if (time <= 0) {
 
       clearInterval(timer);
 
-      timer = null;
-
-      completePomodoro();
+      complete();
     }
 
-  },1000);
+  }, 1000);
 }
 
-
-
-// ========================
-// 完了
-// ========================
-
-function completePomodoro(){
+// 完了処理
+function complete() {
 
   streak++;
 
-  let gainedExp = 10;
+  let gain = 10;
 
-  // 3回ごと2倍
-
-  if(streak % 3 === 0){
-
-    gainedExp *= 2;
+  if (streak % 3 === 0) {
+    gain *= 2;
   }
 
-  exp += gainedExp;
+  exp += gain;
+  today++;
+  total++;
 
-  totalCount++;
-
-  todayCount++;
-
-  // レベルアップ
-
-  if(exp >= level * 100){
-
+  if (exp >= level * 100) {
     level++;
   }
 
-  saveData();
+  localStorage.setItem("exp", exp);
+  localStorage.setItem("level", level);
+  localStorage.setItem("today", today);
+  localStorage.setItem("total", total);
 
-  updateUI();
+  document.getElementById("finish-sound").play();
 
-  // 完了音
-
-  document
-  .getElementById("finish-sound")
-  .play();
-
-  alert(
-    `ポモドーロ完了！\nEXP +${gainedExp}`
-  );
-
-  // ホーム戻る
+  alert("EXP + " + gain);
 
   showHome();
 }
 
-
-
-// ========================
 // 中断
-// ========================
-
-document
-.getElementById("stop-btn")
-.onclick = ()=>{
-
+document.getElementById("stop-btn").onclick = () => {
   clearInterval(timer);
-
-  timer = null;
-
   showHome();
 };
-
-
-
-// ========================
-// 保存
-// ========================
-
-function saveData(){
-
-  localStorage.setItem(
-    "exp",
-    exp
-  );
-
-  localStorage.setItem(
-    "level",
-    level
-  );
-
-  localStorage.setItem(
-    "totalCount",
-    totalCount
-  );
-
-  localStorage.setItem(
-    "todayCount",
-    todayCount
-  );
-
-  localStorage.setItem(
-    "streak",
-    streak
-  );
-}
