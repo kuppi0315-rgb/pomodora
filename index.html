@@ -10,23 +10,27 @@
 
 <body>
 
-  <!-- ホーム -->
   <div id="home">
 
     <h1 id="logo">POMODORA</h1>
 
+    <!-- 🐉 モンスター（大きく） -->
     <img id="monster" src="assets/monsters/monster1.png">
 
     <h2 id="level">Lv.1</h2>
 
-    <!-- EXPバー -->
+    <!-- 📊 EXPバー復活 -->
     <div id="exp-bar">
       <div id="exp-fill"></div>
     </div>
 
-    <p>EXP: <span id="exp">0</span></p>
+    <p>
+      EXP <span id="exp">0</span> / <span id="need">100</span>
+    </p>
 
-    <p>今日 <span id="today">0</span> / 累計 <span id="total">0</span></p>
+    <p>
+      今日 <span id="today">0</span> / 累計 <span id="total">0</span>
+    </p>
 
     <img id="hourglass-btn" src="assets/icons/hourglass.png">
 
@@ -43,7 +47,6 @@
 
   </div>
 
-  <!-- 音 -->
   <audio id="bgm" src="assets/sounds/timer.mp3" loop></audio>
   <audio id="finish" src="assets/sounds/finish.mp3"></audio>
 
