@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodora</title>
 
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>POMODORA</h1>
+
+    <img
+      id="monster"
+      src="assets/monsters/egg.png"
+      alt="monster"
+    >
+
+    <h2 id="level">Lv.1</h2>
+
+    <div id="timer">
+      25:00
+    </div>
+
+    <div class="buttons">
+      <button id="start">START</button>
+      <button id="stop">STOP</button>
+      <button id="reset">RESET</button>
+    </div>
+
+    <div class="stats">
+      <p>EXP : <span id="exp">0</span></p>
+      <p>今日のポモドロ : <span id="count">0</span></p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
