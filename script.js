@@ -10,14 +10,51 @@ document.getElementById("home");
 
 
 // ========================
-// ローディング画面
+// 保存データ
+// ========================
+
+let selectedMonster =
+localStorage.getItem("monster")
+|| "";
+
+let exp =
+Number(localStorage.getItem("exp"))
+|| 0;
+
+let level =
+Number(localStorage.getItem("level"))
+|| 1;
+
+let totalCount =
+Number(localStorage.getItem("totalCount"))
+|| 0;
+
+let todayCount =
+Number(localStorage.getItem("todayCount"))
+|| 0;
+
+let streak =
+Number(localStorage.getItem("streak"))
+|| 0;
+
+
+
+// ========================
+// ローディング
 // ========================
 
 setTimeout(()=>{
 
   loading.classList.add("hidden");
 
-  selectScreen.classList.remove("hidden");
+  if(selectedMonster){
+
+    showHome();
+
+  }else{
+
+    selectScreen.classList.remove("hidden");
+  }
 
 },2000);
 
@@ -26,8 +63,6 @@ setTimeout(()=>{
 // ========================
 // モンスター選択
 // ========================
-
-let selectedMonster = "";
 
 document
 .querySelectorAll(".monster-select")
@@ -38,60 +73,100 @@ document
     selectedMonster =
     monster.dataset.monster;
 
-    document
-    .getElementById("monster-image")
-    .src =
-    `assets/monsters/${selectedMonster}.png`;
+    localStorage.setItem(
+      "monster",
+      selectedMonster
+    );
 
-    selectScreen
-    .classList.add("hidden");
-
-    home
-    .classList.remove("hidden");
+    showHome();
   };
 });
 
 
 
 // ========================
-// 基本データ
+// ホーム表示
+// ========================
+
+function showHome(){
+
+  selectScreen.classList.add("hidden");
+
+  home.classList.remove("hidden");
+
+  updateUI();
+}
+
+
+
+// ========================
+// UI更新
+// ========================
+
+function updateUI(){
+
+  document
+  .getElementById("monster-image")
+  .src =
+  `assets/monsters/${selectedMonster}.png`;
+
+  document
+  .getElementById("monster-level")
+  .innerText =
+  `Lv.${level}`;
+
+  document
+  .getElementById("exp")
+  .innerText =
+  exp;
+
+  document
+  .getElementById("today-count")
+  .innerText =
+  todayCount;
+
+  document
+  .getElementById("total-count")
+  .innerText =
+  totalCount;
+
+  // EXPバー
+
+  let percent =
+  (exp % 100);
+
+  document
+  .getElementById("exp-bar")
+  .style.width =
+  `${percent}%`;
+
+
+
+  // 進化
+
+  if(level >= 5){
+
+    document
+    .getElementById("monster-image")
+    .src =
+    "assets/monsters/evolve1.png";
+  }
+}
+
+
+
+// ========================
+// タイマー
 // ========================
 
 let time = 25 * 60;
 
 let timer = null;
 
-let exp = 0;
-
-let level = 1;
-
-let pomodoroCount = 0;
-
-let streak = 0;
-
-
-
-// ========================
-// HTML取得
-// ========================
-
 const timerDisplay =
 document.getElementById("timer");
 
-const expDisplay =
-document.getElementById("exp");
 
-const levelDisplay =
-document.getElementById("monster-level");
-
-const pomodoroDisplay =
-document.getElementById("pomodoro-count");
-
-
-
-// ========================
-// タイマー表示更新
-// ========================
 
 function updateTimer(){
 
@@ -110,7 +185,7 @@ updateTimer();
 
 
 // ========================
-// STARTボタン
+// START
 // ========================
 
 document
@@ -125,10 +200,6 @@ document
 
     updateTimer();
 
-    // ====================
-    // ポモドーロ完了
-    // ====================
-
     if(time <= 0){
 
       clearInterval(timer);
@@ -136,8 +207,6 @@ document
       timer = null;
 
       streak++;
-
-      // EXP計算
 
       let gainedExp = 10;
 
@@ -150,46 +219,34 @@ document
 
       exp += gainedExp;
 
-      pomodoroCount++;
+      totalCount++;
 
-      // 表示更新
+      todayCount++;
 
-      expDisplay.innerText = exp;
-
-      pomodoroDisplay.innerText =
-      pomodoroCount;
-
-      // ====================
       // レベルアップ
-      // ====================
 
       if(exp >= level * 100){
 
         level++;
-
-        levelDisplay.innerText =
-        `Lv.${level}`;
-
-        // ==================
-        // 進化
-        // ==================
-
-        if(level >= 5){
-
-          document
-          .getElementById("monster-image")
-          .src =
-          "assets/monsters/evolve1.png";
-        }
       }
 
-      // 完了通知
+      // 保存
+
+      saveData();
+
+      // UI更新
+
+      updateUI();
+
+      // 音
+
+      document
+      .getElementById("finish-sound")
+      .play();
 
       alert(
         `ポモドーロ完了！\nEXP +${gainedExp}`
       );
-
-      // タイマーリセット
 
       time = 25 * 60;
 
@@ -197,13 +254,12 @@ document
     }
 
   },1000);
-
 };
 
 
 
 // ========================
-// STOPボタン
+// STOP
 // ========================
 
 document
@@ -218,7 +274,7 @@ document
 
 
 // ========================
-// RESETボタン
+// RESET
 // ========================
 
 document
@@ -233,3 +289,37 @@ document
 
   updateTimer();
 };
+
+
+
+// ========================
+// 保存
+// ========================
+
+function saveData(){
+
+  localStorage.setItem(
+    "exp",
+    exp
+  );
+
+  localStorage.setItem(
+    "level",
+    level
+  );
+
+  localStorage.setItem(
+    "totalCount",
+    totalCount
+  );
+
+  localStorage.setItem(
+    "todayCount",
+    todayCount
+  );
+
+  localStorage.setItem(
+    "streak",
+    streak
+  );
+}
