@@ -132,6 +132,12 @@ body{
 
 #plaza{
 
+  position:relative;
+
+  width:100%;
+
+  height:350px;
+
   margin-top:20px;
 }
 
@@ -141,9 +147,34 @@ body{
 
 #monster-image{
 
-  width:260px;
+  width:240px;
+
+  position:relative;
+
+  z-index:2;
 
   animation:float 3s infinite ease-in-out;
+}
+
+
+
+/* 地面 */
+
+#plaza-ground{
+
+  width:320px;
+
+  height:80px;
+
+  background:#2d5a27;
+
+  border-radius:50%;
+
+  margin:auto;
+
+  margin-top:-30px;
+
+  filter:blur(2px);
 }
 
 
@@ -231,18 +262,48 @@ p{
 
 
 /* ========================
-   タイマー
+   砂時計
 ======================== */
+
+#hourglass-btn{
+
+  width:120px;
+
+  margin-top:30px;
+
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+#hourglass-btn:hover{
+
+  transform:scale(1.1);
+}
+
+
+
+/* ========================
+   タイマー画面
+======================== */
+
+#timer-screen{
+
+  margin-top:220px;
+}
+
+#timer-screen h1{
+
+  font-size:48px;
+}
 
 #timer{
 
-  font-size:82px;
+  font-size:100px;
 
   font-weight:bold;
 
-  margin-top:40px;
-
-  letter-spacing:3px;
+  margin-top:30px;
 }
 
 
@@ -251,16 +312,11 @@ p{
    ボタン
 ======================== */
 
-.buttons{
-
-  margin-top:30px;
-}
-
 button{
 
   padding:16px 28px;
 
-  margin:10px;
+  margin-top:40px;
 
   border:none;
 
@@ -280,13 +336,6 @@ button{
 button:hover{
 
   transform:scale(1.05);
-
-  opacity:0.9;
-}
-
-button:active{
-
-  transform:scale(0.95);
 }
 
 
@@ -314,7 +363,7 @@ button:active{
 
   #monster-image{
 
-    width:200px;
+    width:180px;
   }
 
   #monster-level{
@@ -322,14 +371,14 @@ button:active{
     font-size:28px;
   }
 
+  #timer{
+
+    font-size:72px;
+  }
+
   p{
 
     font-size:20px;
-  }
-
-  #timer{
-
-    font-size:56px;
   }
 
   button{
@@ -337,7 +386,5 @@ button:active{
     width:80%;
 
     max-width:300px;
-
-    font-size:20px;
   }
 }
