@@ -1,144 +1,83 @@
 body{
-
   margin:0;
-  padding:0;
-
   background:#121212;
   color:white;
-
   font-family:sans-serif;
   text-align:center;
-
-  overflow-x:hidden;
 }
 
 .hidden{display:none;}
 
 /* =====================
-   ロゴ（小さく）
+   ロゴ
 ===================== */
 
 #logo{
-  font-size:42px;
+  font-size:40px;
   color:#4caf50;
-  margin-top:200px;
 }
 
 #logo-small{
-  font-size:34px;
+  font-size:32px;
   color:#4caf50;
-  margin-top:20px;
 }
 
 /* =====================
-   選択
+   モンスター
 ===================== */
-
-#select-screen h2{
-  font-size:36px;
-  margin-top:50px;
-}
-
-.monster-list{
-  display:flex;
-  justify-content:center;
-  gap:25px;
-  margin-top:60px;
-}
-
-.monster-select{
-  width:180px;
-  background:#1e1e1e;
-  padding:15px;
-  border-radius:18px;
-}
-
-/* =====================
-   広場
-===================== */
-
-#plaza{
-  height:320px;
-}
 
 #monster-image{
   width:230px;
-  animation:float 3s infinite ease-in-out;
+  transition:0.4s;
 }
 
-#plaza-ground{
-  width:300px;
-  height:70px;
-  background:#2d5a27;
-  margin:auto;
-  border-radius:50%;
-  filter:blur(2px);
-}
-
-@keyframes float{
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-  100%{transform:translateY(0);}
+/* 目を閉じた状態 */
+.sleeping{
+  filter:brightness(0.7);
+  transform:scale(0.95);
 }
 
 /* =====================
-   レベル
-===================== */
-
-#monster-level{
-  font-size:32px;
-}
-
-/* =====================
-   EXPゲージ（追加）
-===================== */
-
-#level-bar{
-
-  width:300px;
-  height:16px;
-
-  background:#333;
-
-  margin:10px auto;
-
-  border-radius:10px;
-
-  overflow:hidden;
-}
-
-#level-fill{
-
-  height:100%;
-  width:0%;
-
-  background:#4caf50;
-
-  transition:0.3s;
-}
-
-/* =====================
-   砂時計（大）
+   砂時計（アニメ付き）
 ===================== */
 
 #hourglass-btn{
-
-  width:260px;
-  height:110px;
-
+  width:220px;
   margin:40px auto;
-
-  background:#4caf50;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  font-size:32px;
-
-  border-radius:20px;
-
   cursor:pointer;
+  display:block;
+  transition:0.2s;
+  animation:shake 2s infinite ease-in-out;
+}
+
+@keyframes shake{
+  0%{transform:rotate(0deg);}
+  50%{transform:rotate(5deg);}
+  100%{transform:rotate(0deg);}
+}
+
+/* =====================
+   集中エフェクト
+===================== */
+
+#focus-overlay{
+
+  position:fixed;
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:rgba(0,0,0,0);
+
+  pointer-events:none;
+
+  transition:1s;
+}
+
+.focus-active{
+  background:rgba(0,0,0,0.6);
 }
 
 /* =====================
