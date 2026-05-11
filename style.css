@@ -12,56 +12,57 @@ body{
   overflow-x:hidden;
 }
 
-.hidden{
-  display:none;
-}
+.hidden{display:none;}
 
-/* ローディング */
-#loading{
-  margin-top:220px;
-}
+/* =====================
+   ロゴ（小さく）
+===================== */
 
-#loading h1{
-  font-size:64px;
+#logo{
+  font-size:42px;
   color:#4caf50;
+  margin-top:200px;
 }
 
-/* 選択 */
+#logo-small{
+  font-size:34px;
+  color:#4caf50;
+  margin-top:20px;
+}
+
+/* =====================
+   選択
+===================== */
+
 #select-screen h2{
-  font-size:40px;
-  margin-top:60px;
+  font-size:36px;
+  margin-top:50px;
 }
 
 .monster-list{
   display:flex;
   justify-content:center;
   gap:25px;
-  margin-top:70px;
+  margin-top:60px;
 }
 
 .monster-select{
-  width:200px;
+  width:180px;
   background:#1e1e1e;
   padding:15px;
-  border-radius:20px;
-  cursor:pointer;
+  border-radius:18px;
 }
 
-/* ホーム */
-#home h1{
-  color:#4caf50;
-  font-size:50px;
-}
+/* =====================
+   広場
+===================== */
 
-/* 広場 */
 #plaza{
-  position:relative;
   height:320px;
 }
 
 #monster-image{
-  width:240px;
-  transition:0.3s;
+  width:230px;
   animation:float 3s infinite ease-in-out;
 }
 
@@ -80,61 +81,70 @@ body{
   100%{transform:translateY(0);}
 }
 
-/* =========================
-   ★砂時計（超強化）
-========================= */
+/* =====================
+   レベル
+===================== */
+
+#monster-level{
+  font-size:32px;
+}
+
+/* =====================
+   EXPゲージ（追加）
+===================== */
+
+#level-bar{
+
+  width:300px;
+  height:16px;
+
+  background:#333;
+
+  margin:10px auto;
+
+  border-radius:10px;
+
+  overflow:hidden;
+}
+
+#level-fill{
+
+  height:100%;
+  width:0%;
+
+  background:#4caf50;
+
+  transition:0.3s;
+}
+
+/* =====================
+   砂時計（大）
+===================== */
 
 #hourglass-btn{
 
-  width:280px;
-  height:120px;
+  width:260px;
+  height:110px;
 
   margin:40px auto;
 
   background:#4caf50;
 
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 
-  font-size:36px;
-  font-weight:bold;
+  font-size:32px;
 
-  border-radius:22px;
+  border-radius:20px;
 
   cursor:pointer;
-
-  box-shadow:0 0 20px rgba(0,0,0,0.6);
-
-  transition:0.2s;
-
-  user-select:none;
 }
 
-#hourglass-btn:hover{
-  transform:scale(1.08);
-}
-
-#hourglass-btn:active{
-  transform:scale(0.95);
-}
-
-/* タイマー */
-#timer-screen{
-  margin-top:200px;
-}
+/* =====================
+   タイマー
+===================== */
 
 #timer{
-  font-size:100px;
-  font-weight:bold;
-}
-
-button{
-  padding:15px 30px;
-  font-size:20px;
-  margin-top:30px;
-  background:#4caf50;
-  border:none;
-  border-radius:12px;
-  color:white;
+  font-size:90px;
 }
