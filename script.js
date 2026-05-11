@@ -3,6 +3,10 @@ const selectScreen = document.getElementById("select-screen");
 const home = document.getElementById("home");
 const timerScreen = document.getElementById("timer-screen");
 
+const bgm = document.getElementById("bgm");
+const focus = document.getElementById("focus-overlay");
+const monsterImg = document.getElementById("monster-image");
+
 let selectedMonster = localStorage.getItem("monster") || "";
 
 let exp = Number(localStorage.getItem("exp")) || 0;
@@ -19,6 +23,7 @@ let streak = 0;
 ===================== */
 
 setTimeout(() => {
+
   loading.classList.add("hidden");
 
   if (selectedMonster) {
@@ -46,54 +51,67 @@ document.querySelectorAll(".monster-select").forEach(m => {
 ===================== */
 
 function showHome() {
+
   selectScreen.classList.add("hidden");
   timerScreen.classList.add("hidden");
   home.classList.remove("hidden");
+
+  bgm.pause();
+
   updateUI();
 }
 
 /* =====================
-   UI更新
+   UI
 ===================== */
 
 function updateUI() {
 
-  document.getElementById("monster-image").src =
-    `assets/monsters/${selectedMonster}.png`;
+  monsterImg.src = `assets/monsters/${selectedMonster}.png`;
 
   document.getElementById("exp").innerText = exp;
   document.getElementById("today-count").innerText = today;
   document.getElementById("total-count").innerText = total;
-  document.getElementById("monster-level").innerText = "Lv." + level;
-
-  /* =====================
-     EXPゲージ計算
-  ===================== */
-
-  let base = level * 100;
-  let percent = (exp % base) / base * 100;
-
-  document.getElementById("level-fill").style.width =
-    percent + "%";
 }
 
 /* =====================
-   砂時計
+   砂時計クリック
 ===================== */
 
 document.getElementById("hourglass-btn").onclick = () => {
+
   home.classList.add("hidden");
   timerScreen.classList.remove("hidden");
+
+  startFocusMode();
   startTimer();
 };
 
 /* =====================
-   タイマー（1秒）
+   集中モード演出
+===================== */
+
+function startFocusMode(){
+
+  focus.classList.add("focus-active");
+
+  monsterImg.classList.add("sleeping"); // 目を閉じる
+
+  setTimeout(() => {
+    focus.classList.remove("focus-active");
+  }, 1000);
+}
+
+/* =====================
+   タイマー
 ===================== */
 
 function startTimer() {
 
   time = 1;
+
+  bgm.currentTime = 0;
+  bgm.play();
 
   timer = setInterval(() => {
 
@@ -115,6 +133,8 @@ function startTimer() {
 
 function complete() {
 
+  bgm.pause();
+
   streak++;
 
   let gain = 10;
@@ -125,9 +145,7 @@ function complete() {
   today++;
   total++;
 
-  if (exp >= level * 100) {
-    level++;
-  }
+  if (exp >= level * 100) level++;
 
   localStorage.setItem("exp", exp);
   localStorage.setItem("level", level);
@@ -136,7 +154,7 @@ function complete() {
 
   document.getElementById("finish-sound").play();
 
-  alert("EXP + " + gain);
+  monsterImg.classList.remove("sleeping");
 
   showHome();
 }
@@ -146,6 +164,11 @@ function complete() {
 ===================== */
 
 document.getElementById("stop-btn").onclick = () => {
+
   clearInterval(timer);
+  bgm.pause();
+
+  monsterImg.classList.remove("sleeping");
+
   showHome();
 };
