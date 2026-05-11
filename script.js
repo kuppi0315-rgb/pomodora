@@ -7,6 +7,9 @@ document.getElementById("select-screen");
 const home =
 document.getElementById("home");
 
+const timerScreen =
+document.getElementById("timer-screen");
+
 
 
 // ========================
@@ -56,7 +59,7 @@ setTimeout(()=>{
     selectScreen.classList.remove("hidden");
   }
 
-},2000);
+},1500);
 
 
 
@@ -89,6 +92,8 @@ document
 // ========================
 
 function showHome(){
+
+  timerScreen.classList.add("hidden");
 
   selectScreen.classList.add("hidden");
 
@@ -130,10 +135,12 @@ function updateUI(){
   .innerText =
   totalCount;
 
+
+
   // EXPバー
 
   let percent =
-  (exp % 100);
+  exp % 100;
 
   document
   .getElementById("exp-bar")
@@ -159,7 +166,9 @@ function updateUI(){
 // タイマー
 // ========================
 
-let time = 25 * 60;
+// テスト用1秒
+
+let time = 1;
 
 let timer = null;
 
@@ -180,19 +189,34 @@ function updateTimer(){
   `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
 }
 
-updateTimer();
-
 
 
 // ========================
-// START
+// 砂時計ボタン
 // ========================
 
 document
-.getElementById("start-btn")
+.getElementById("hourglass-btn")
 .onclick = ()=>{
 
-  if(timer) return;
+  home.classList.add("hidden");
+
+  timerScreen.classList.remove("hidden");
+
+  startPomodoro();
+};
+
+
+
+// ========================
+// ポモドーロ開始
+// ========================
+
+function startPomodoro(){
+
+  time = 1;
+
+  updateTimer();
 
   timer = setInterval(()=>{
 
@@ -206,60 +230,67 @@ document
 
       timer = null;
 
-      streak++;
-
-      let gainedExp = 10;
-
-      // 3回ごと2倍
-
-      if(streak % 3 === 0){
-
-        gainedExp *= 2;
-      }
-
-      exp += gainedExp;
-
-      totalCount++;
-
-      todayCount++;
-
-      // レベルアップ
-
-      if(exp >= level * 100){
-
-        level++;
-      }
-
-      // 保存
-
-      saveData();
-
-      // UI更新
-
-      updateUI();
-
-      // 音
-
-      document
-      .getElementById("finish-sound")
-      .play();
-
-      alert(
-        `ポモドーロ完了！\nEXP +${gainedExp}`
-      );
-
-      time = 25 * 60;
-
-      updateTimer();
+      completePomodoro();
     }
 
   },1000);
-};
+}
 
 
 
 // ========================
-// STOP
+// 完了
+// ========================
+
+function completePomodoro(){
+
+  streak++;
+
+  let gainedExp = 10;
+
+  // 3回ごと2倍
+
+  if(streak % 3 === 0){
+
+    gainedExp *= 2;
+  }
+
+  exp += gainedExp;
+
+  totalCount++;
+
+  todayCount++;
+
+  // レベルアップ
+
+  if(exp >= level * 100){
+
+    level++;
+  }
+
+  saveData();
+
+  updateUI();
+
+  // 完了音
+
+  document
+  .getElementById("finish-sound")
+  .play();
+
+  alert(
+    `ポモドーロ完了！\nEXP +${gainedExp}`
+  );
+
+  // ホーム戻る
+
+  showHome();
+}
+
+
+
+// ========================
+// 中断
 // ========================
 
 document
@@ -269,25 +300,8 @@ document
   clearInterval(timer);
 
   timer = null;
-};
 
-
-
-// ========================
-// RESET
-// ========================
-
-document
-.getElementById("reset-btn")
-.onclick = ()=>{
-
-  clearInterval(timer);
-
-  timer = null;
-
-  time = 25 * 60;
-
-  updateTimer();
+  showHome();
 };
 
 
