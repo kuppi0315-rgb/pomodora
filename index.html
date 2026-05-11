@@ -2,163 +2,72 @@
 <html lang="ja">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>POMODORA</title>
-
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
   <!-- ローディング -->
-
   <div id="loading">
-
     <h1>POMODORA</h1>
-
     <p>Loading...</p>
-
   </div>
 
-
-
-  <!-- モンスター選択 -->
-
+  <!-- 選択 -->
   <div id="select-screen" class="hidden">
 
     <h2>モンスターを選択</h2>
 
     <div class="monster-list">
 
-      <img
-        src="assets/monsters/monster1.png"
-        class="monster-select"
-        data-monster="monster1"
-      >
-
-      <img
-        src="assets/monsters/monster2.png"
-        class="monster-select"
-        data-monster="monster2"
-      >
-
-      <img
-        src="assets/monsters/monster3.png"
-        class="monster-select"
-        data-monster="monster3"
-      >
+      <img src="assets/monsters/monster1.png" class="monster-select" data-monster="monster1">
+      <img src="assets/monsters/monster2.png" class="monster-select" data-monster="monster2">
+      <img src="assets/monsters/monster3.png" class="monster-select" data-monster="monster3">
 
     </div>
 
   </div>
 
-
-
-  <!-- ホーム画面 -->
-
+  <!-- ホーム -->
   <div id="home" class="hidden">
 
     <h1>POMODORA</h1>
 
-    <!-- 広場 -->
-
     <div id="plaza">
 
-      <!-- モンスター -->
-
-      <img
-        id="monster-image"
-        src="assets/monsters/sleep.png"
-      >
-
-      <!-- 地面 -->
+      <img id="monster-image" src="assets/monsters/sleep.png">
 
       <div id="plaza-ground"></div>
 
     </div>
 
+    <h2 id="monster-level">Lv.1</h2>
 
+    <p>EXP : <span id="exp">0</span></p>
+    <p>今日 : <span id="today-count">0</span></p>
+    <p>累計 : <span id="total-count">0</span></p>
 
-    <!-- レベル -->
-
-    <h2 id="monster-level">
-      Lv.1
-    </h2>
-
-
-
-    <!-- EXPバー -->
-
-    <div id="exp-container">
-
-      <div id="exp-bar"></div>
-
-    </div>
-
-
-
-    <!-- ステータス -->
-
-    <p>
-      EXP :
-      <span id="exp">0</span>
-    </p>
-
-    <p>
-      今日 :
-      <span id="today-count">0</span>
-    </p>
-
-    <p>
-      累計 :
-      <span id="total-count">0</span>
-    </p>
-
-
-
-    <!-- 砂時計 -->
-
-    <img
-      id="hourglass-btn"
-      src="assets/icons/icon.png"
-    >
+    <!-- ★砂時計（超大型化） -->
+    <div id="hourglass-btn">⏳ START</div>
 
   </div>
 
-
-
-  <!-- タイマー画面 -->
-
+  <!-- タイマー -->
   <div id="timer-screen" class="hidden">
 
     <h1>集中中...</h1>
 
-    <div id="timer">
-      00:01
-    </div>
+    <div id="timer">00:01</div>
 
-    <button id="stop-btn">
-      中断
-    </button>
+    <button id="stop-btn">中断</button>
 
   </div>
 
-
-
-  <!-- 完了音 -->
-
-  <audio
-    id="finish-sound"
-    src="assets/sounds/finish.mp3"
-  ></audio>
+  <!-- 音 -->
+  <audio id="finish-sound" src="assets/sounds/finish.mp3"></audio>
 
   <script src="script.js"></script>
 
