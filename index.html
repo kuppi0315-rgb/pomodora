@@ -1,45 +1,98 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pomodora</title>
+
+  <title>POMODORA</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="container">
+  <!-- ローディング -->
+
+  <div id="loading">
 
     <h1>POMODORA</h1>
 
-    <img
-      id="monster"
-      src="assets/monsters/egg.png"
-      alt="monster"
-    >
+    <p>Loading...</p>
 
-    <h2 id="level">Lv.1</h2>
+  </div>
+
+  <!-- ドラゴン選択 -->
+
+  <div id="select-screen" class="hidden">
+
+    <h2>ドラゴンを選択</h2>
+
+    <div class="dragon-list">
+
+      <img src="assets/dragons/dragon1.png"
+      class="dragon-select"
+      data-dragon="dragon1">
+
+      <img src="assets/dragons/dragon2.png"
+      class="dragon-select"
+      data-dragon="dragon2">
+
+      <img src="assets/dragons/dragon3.png"
+      class="dragon-select"
+      data-dragon="dragon3">
+
+    </div>
+
+  </div>
+
+  <!-- ホーム -->
+
+  <div id="home" class="hidden">
+
+    <h1>POMODORA</h1>
+
+    <img id="dragon-image"
+    src="assets/dragons/sleep.png">
+
+    <h2 id="dragon-level">
+      Lv.1
+    </h2>
+
+    <p>
+      EXP :
+      <span id="exp">
+        0
+      </span>
+    </p>
+
+    <p>
+      ポモドーロ :
+      <span id="pomodoro-count">
+        0
+      </span>
+    </p>
 
     <div id="timer">
       25:00
     </div>
 
-    <div class="buttons">
-      <button id="start">START</button>
-      <button id="stop">STOP</button>
-      <button id="reset">RESET</button>
-    </div>
+    <button id="start-btn">
+      START
+    </button>
 
-    <div class="stats">
-      <p>EXP : <span id="exp">0</span></p>
-      <p>今日のポモドロ : <span id="count">0</span></p>
-    </div>
+    <button id="stop-btn">
+      STOP
+    </button>
+
+    <button id="reset-btn">
+      RESET
+    </button>
 
   </div>
 
   <script src="script.js"></script>
 
 </body>
+
 </html>
