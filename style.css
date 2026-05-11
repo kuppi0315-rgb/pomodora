@@ -13,6 +13,7 @@ body{
 }
 
 .hidden{
+
   display:none;
 }
 
@@ -21,7 +22,7 @@ body{
   margin-top:200px;
 }
 
-.dragon-list{
+.monster-list{
 
   display:flex;
 
@@ -32,7 +33,7 @@ body{
   margin-top:50px;
 }
 
-.dragon-select{
+.monster-select{
 
   width:120px;
 
@@ -41,16 +42,36 @@ body{
   transition:0.3s;
 }
 
-.dragon-select:hover{
+.monster-select:hover{
 
   transform:scale(1.1);
 }
 
-#dragon-image{
+#plaza{
+
+  margin-top:20px;
+}
+
+#monster-image{
 
   width:240px;
 
-  margin-top:20px;
+  animation:float 3s infinite ease-in-out;
+}
+
+@keyframes float{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
 }
 
 #timer{
@@ -58,6 +79,11 @@ body{
   font-size:72px;
 
   margin-top:30px;
+}
+
+.buttons{
+
+  margin-top:20px;
 }
 
 button{
@@ -82,4 +108,28 @@ button{
 button:hover{
 
   opacity:0.8;
+}
+
+#exp-container{
+
+  width:300px;
+
+  height:20px;
+
+  background:#333;
+
+  margin:20px auto;
+
+  border-radius:20px;
+
+  overflow:hidden;
+}
+
+#exp-bar{
+
+  width:0%;
+
+  height:100%;
+
+  background:#4caf50;
 }
