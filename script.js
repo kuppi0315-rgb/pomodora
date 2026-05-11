@@ -1,46 +1,31 @@
+const home = document.getElementById("home");
+const timerScreen = document.getElementById("timer-screen");
+
 const btn = document.getElementById("hourglass-btn");
-
-const sandTop = document.querySelector(".sand-top");
-const sandBottom = document.querySelector(".sand-bottom");
-
 const bgm = document.getElementById("bgm");
+const finish = document.getElementById("finish");
 
 let time = 10;
 let timer = null;
 
-let total = 0;
 let today = 0;
+let total = 0;
 
-/* =========================
+/* =====================
    砂時計クリック
-========================= */
+===================== */
 
 btn.onclick = () => {
 
-  /* 回転リセット */
-  btn.classList.remove("rotate");
-  void btn.offsetWidth;
-  btn.classList.add("rotate");
-
-  /* 砂アニメ完全リセット */
-  sandTop.classList.remove("run");
-  sandBottom.classList.remove("run");
-
-  void sandTop.offsetWidth;
-
-  sandTop.classList.add("run");
-  sandBottom.classList.add("run");
-
-  /* UI切替 */
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("timer-screen").classList.remove("hidden");
+  home.classList.add("hidden");
+  timerScreen.classList.remove("hidden");
 
   startTimer();
 };
 
-/* =========================
-   タイマー（10秒）
-========================= */
+/* =====================
+   タイマー（10秒テスト）
+===================== */
 
 function startTimer(){
 
@@ -68,9 +53,9 @@ function startTimer(){
   },1000);
 }
 
-/* =========================
-   完了
-========================= */
+/* =====================
+   完了処理
+===================== */
 
 function complete(){
 
@@ -79,21 +64,24 @@ function complete(){
   total++;
   today++;
 
-  document.getElementById("finish").play();
+  finish.play();
 
-  document.getElementById("home").classList.remove("hidden");
-  document.getElementById("timer-screen").classList.add("hidden");
+  document.getElementById("today").innerText = today;
+  document.getElementById("total").innerText = total;
+
+  home.classList.remove("hidden");
+  timerScreen.classList.add("hidden");
 }
 
-/* =========================
+/* =====================
    中断
-========================= */
+===================== */
 
 document.getElementById("stop").onclick = () => {
 
   clearInterval(timer);
   bgm.pause();
 
-  document.getElementById("home").classList.remove("hidden");
-  document.getElementById("timer-screen").classList.add("hidden");
+  home.classList.remove("hidden");
+  timerScreen.classList.add("hidden");
 };
