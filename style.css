@@ -10,16 +10,59 @@ body{
   font-family:sans-serif;
 
   text-align:center;
+
+  overflow-x:hidden;
 }
+
+
+
+/* ========================
+   非表示
+======================== */
 
 .hidden{
 
   display:none;
 }
 
+
+
+/* ========================
+   ローディング
+======================== */
+
 #loading{
 
-  margin-top:200px;
+  margin-top:220px;
+}
+
+#loading h1{
+
+  font-size:64px;
+
+  color:#4caf50;
+
+  letter-spacing:4px;
+}
+
+#loading p{
+
+  font-size:24px;
+
+  opacity:0.7;
+}
+
+
+
+/* ========================
+   モンスター選択
+======================== */
+
+#select-screen h2{
+
+  font-size:42px;
+
+  margin-top:60px;
 }
 
 .monster-list{
@@ -28,95 +71,131 @@ body{
 
   justify-content:center;
 
-  gap:20px;
+  align-items:center;
 
-  margin-top:50px;
+  gap:30px;
+
+  margin-top:80px;
+
+  flex-wrap:wrap;
 }
 
 .monster-select{
 
-  width:120px;
+  width:220px;
+
+  max-width:70vw;
 
   cursor:pointer;
 
   transition:0.3s;
+
+  border-radius:20px;
+
+  background:#1e1e1e;
+
+  padding:20px;
+
+  box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 
 .monster-select:hover{
 
-  transform:scale(1.1);
+  transform:scale(1.08);
 }
+
+
+
+/* ========================
+   ホーム
+======================== */
+
+#home{
+
+  padding-bottom:100px;
+}
+
+#home h1{
+
+  font-size:56px;
+
+  color:#4caf50;
+
+  margin-top:30px;
+}
+
+
+
+/* ========================
+   広場
+======================== */
 
 #plaza{
 
   margin-top:20px;
 }
 
+
+
+/* モンスター */
+
 #monster-image{
 
-  width:240px;
+  width:260px;
 
   animation:float 3s infinite ease-in-out;
 }
 
+
+
+/* 浮遊 */
+
 @keyframes float{
 
   0%{
+
     transform:translateY(0px);
   }
 
   50%{
+
     transform:translateY(-10px);
   }
 
   100%{
+
     transform:translateY(0px);
   }
 }
 
-#timer{
 
-  font-size:72px;
 
-  margin-top:30px;
+/* ========================
+   レベル
+======================== */
+
+#monster-level{
+
+  font-size:36px;
+
+  margin-top:10px;
 }
 
-.buttons{
 
-  margin-top:20px;
-}
 
-button{
-
-  padding:15px 25px;
-
-  margin:10px;
-
-  border:none;
-
-  border-radius:12px;
-
-  background:#4caf50;
-
-  color:white;
-
-  font-size:20px;
-
-  cursor:pointer;
-}
-
-button:hover{
-
-  opacity:0.8;
-}
+/* ========================
+   EXPバー
+======================== */
 
 #exp-container{
 
-  width:300px;
+  width:320px;
 
-  height:20px;
+  max-width:80vw;
 
-  background:#333;
+  height:24px;
+
+  background:#2a2a2a;
 
   margin:20px auto;
 
@@ -132,4 +211,133 @@ button:hover{
   height:100%;
 
   background:#4caf50;
+
+  transition:0.3s;
+}
+
+
+
+/* ========================
+   ステータス
+======================== */
+
+p{
+
+  font-size:24px;
+
+  margin:12px;
+}
+
+
+
+/* ========================
+   タイマー
+======================== */
+
+#timer{
+
+  font-size:82px;
+
+  font-weight:bold;
+
+  margin-top:40px;
+
+  letter-spacing:3px;
+}
+
+
+
+/* ========================
+   ボタン
+======================== */
+
+.buttons{
+
+  margin-top:30px;
+}
+
+button{
+
+  padding:16px 28px;
+
+  margin:10px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:#4caf50;
+
+  color:white;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+button:hover{
+
+  transform:scale(1.05);
+
+  opacity:0.9;
+}
+
+button:active{
+
+  transform:scale(0.95);
+}
+
+
+
+/* ========================
+   スマホ対応
+======================== */
+
+@media screen and (max-width:600px){
+
+  #loading h1{
+
+    font-size:48px;
+  }
+
+  #select-screen h2{
+
+    font-size:32px;
+  }
+
+  .monster-select{
+
+    width:160px;
+  }
+
+  #monster-image{
+
+    width:200px;
+  }
+
+  #monster-level{
+
+    font-size:28px;
+  }
+
+  p{
+
+    font-size:20px;
+  }
+
+  #timer{
+
+    font-size:56px;
+  }
+
+  button{
+
+    width:80%;
+
+    max-width:300px;
+
+    font-size:20px;
+  }
 }
