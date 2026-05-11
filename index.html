@@ -28,6 +28,8 @@
 
   </div>
 
+
+
   <!-- モンスター選択 -->
 
   <div id="select-screen" class="hidden">
@@ -58,7 +60,9 @@
 
   </div>
 
-  <!-- ホーム -->
+
+
+  <!-- ホーム画面 -->
 
   <div id="home" class="hidden">
 
@@ -68,22 +72,40 @@
 
     <div id="plaza">
 
+      <!-- モンスター -->
+
       <img
         id="monster-image"
         src="assets/monsters/sleep.png"
       >
 
+      <!-- 地面 -->
+
+      <div id="plaza-ground"></div>
+
     </div>
+
+
+
+    <!-- レベル -->
 
     <h2 id="monster-level">
       Lv.1
     </h2>
+
+
+
+    <!-- EXPバー -->
 
     <div id="exp-container">
 
       <div id="exp-bar"></div>
 
     </div>
+
+
+
+    <!-- ステータス -->
 
     <p>
       EXP :
@@ -100,29 +122,36 @@
       <span id="total-count">0</span>
     </p>
 
-    <!-- タイマー -->
 
-    <div id="timer">
-      25:00
-    </div>
 
-    <div class="buttons">
+    <!-- 砂時計 -->
 
-      <button id="start-btn">
-        START
-      </button>
-
-      <button id="stop-btn">
-        STOP
-      </button>
-
-      <button id="reset-btn">
-        RESET
-      </button>
-
-    </div>
+    <img
+      id="hourglass-btn"
+      src="assets/icons/icon.png"
+    >
 
   </div>
+
+
+
+  <!-- タイマー画面 -->
+
+  <div id="timer-screen" class="hidden">
+
+    <h1>集中中...</h1>
+
+    <div id="timer">
+      00:01
+    </div>
+
+    <button id="stop-btn">
+      中断
+    </button>
+
+  </div>
+
+
 
   <!-- 完了音 -->
 
