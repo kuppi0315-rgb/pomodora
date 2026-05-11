@@ -1,62 +1,40 @@
 body{
-
   margin:0;
-  padding:0;
-
   background:#121212;
   color:white;
-
   font-family:sans-serif;
   text-align:center;
 }
 
 .hidden{display:none;}
 
-/* =====================
-   ロゴ
-===================== */
-
 #logo{
+  color:#4caf50;
   font-size:40px;
-  color:#4caf50;
 }
 
-#logo-small{
-  font-size:32px;
-  color:#4caf50;
+/* モンスター */
+#monster{
+  width:200px;
 }
 
-/* =====================
-   モンスター
-===================== */
-
-#monster-image{
-  width:230px;
-  transition:0.3s;
-}
-
-/* =====================
-   砂時計（回転アニメ付き）
-===================== */
+/* =========================
+   砂時計
+========================= */
 
 #hourglass-btn{
-
   width:220px;
   height:260px;
-
   margin:40px auto;
-
+  cursor:pointer;
   display:flex;
   justify-content:center;
   align-items:center;
-
-  cursor:pointer;
 }
 
-/* 回転アニメ */
+/* 回転 */
 .rotate{
-
-  animation:rotateHourglass 0.8s ease-in-out;
+  animation:rotateHourglass 0.8s ease;
 }
 
 @keyframes rotateHourglass{
@@ -66,24 +44,18 @@ body{
 
 /* 本体 */
 .hourglass{
-
   width:120px;
   height:200px;
-
   position:relative;
 }
 
-/* 上下ガラス */
+/* ガラス */
 .glass{
-
   width:120px;
   height:90px;
-
   border:3px solid white;
-
-  position:relative;
-
   overflow:hidden;
+  position:relative;
 }
 
 .top{
@@ -96,7 +68,7 @@ body{
   border-radius:0 0 60px 60px;
 }
 
-/* 真ん中 */
+/* 中央 */
 .middle{
   width:10px;
   height:20px;
@@ -110,19 +82,15 @@ body{
   background:#f5d76e;
 }
 
-/* 上の砂 */
-.sand-top{
-  height:100%;
+/* ★アニメはJSで付ける */
+.sand-top.run{
   animation:fallTop 10s linear forwards;
 }
 
-/* 下の砂 */
-.sand-bottom{
-  height:0%;
+.sand-bottom.run{
   animation:fallBottom 10s linear forwards;
 }
 
-/* 砂アニメ */
 @keyframes fallTop{
   0%{height:100%;}
   100%{height:0%;}
@@ -133,34 +101,10 @@ body{
   100%{height:100%;}
 }
 
-/* =====================
-   集中エフェクト
-===================== */
-
-#focus-overlay{
-
-  position:fixed;
-  top:0;
-  left:0;
-
-  width:100%;
-  height:100%;
-
-  background:rgba(0,0,0,0);
-
-  pointer-events:none;
-
-  transition:1s;
-}
-
-.focus-active{
-  background:rgba(0,0,0,0.6);
-}
-
-/* =====================
+/* =========================
    タイマー
-===================== */
+========================= */
 
 #timer{
-  font-size:90px;
+  font-size:80px;
 }
