@@ -14,12 +14,11 @@ let time = 1;
 let timer = null;
 let streak = 0;
 
-/* =========================
+/* =====================
    ロード
-========================= */
+===================== */
 
 setTimeout(() => {
-
   loading.classList.add("hidden");
 
   if (selectedMonster) {
@@ -28,46 +27,39 @@ setTimeout(() => {
     selectScreen.classList.remove("hidden");
   }
 
-}, 1200);
+}, 1000);
 
-/* =========================
-   モンスター選択
-========================= */
+/* =====================
+   選択
+===================== */
 
 document.querySelectorAll(".monster-select").forEach(m => {
-
   m.onclick = () => {
-
     selectedMonster = m.dataset.monster;
-
     localStorage.setItem("monster", selectedMonster);
-
     showHome();
   };
 });
 
-/* =========================
+/* =====================
    ホーム
-========================= */
+===================== */
 
 function showHome() {
-
   selectScreen.classList.add("hidden");
   timerScreen.classList.add("hidden");
   home.classList.remove("hidden");
-
   updateUI();
 }
 
-/* =========================
-   UI更新（感情追加）
-========================= */
+/* =====================
+   UI更新
+===================== */
 
 function updateUI() {
 
-  const img = document.getElementById("monster-image");
-
-  img.src = `assets/monsters/${selectedMonster}.png`;
+  document.getElementById("monster-image").src =
+    `assets/monsters/${selectedMonster}.png`;
 
   document.getElementById("exp").innerText = exp;
   document.getElementById("today-count").innerText = today;
@@ -75,37 +67,29 @@ function updateUI() {
   document.getElementById("monster-level").innerText = "Lv." + level;
 
   /* =====================
-     感情変化
+     EXPゲージ計算
   ===================== */
 
-  if (time > 0 && timer) {
-    img.style.transform = "scale(1.05)";
-    img.style.filter = "brightness(1.2)"; // 集中＝元気
-  } else {
-    img.style.transform = "scale(1)";
-    img.style.filter = "brightness(0.8)"; // 待機＝眠い
-  }
+  let base = level * 100;
+  let percent = (exp % base) / base * 100;
 
-  if (level >= 5) {
-    img.src = "assets/monsters/evolve1.png";
-  }
+  document.getElementById("level-fill").style.width =
+    percent + "%";
 }
 
-/* =========================
+/* =====================
    砂時計
-========================= */
+===================== */
 
 document.getElementById("hourglass-btn").onclick = () => {
-
   home.classList.add("hidden");
   timerScreen.classList.remove("hidden");
-
   startTimer();
 };
 
-/* =========================
-   タイマー（1秒テスト）
-========================= */
+/* =====================
+   タイマー（1秒）
+===================== */
 
 function startTimer() {
 
@@ -117,20 +101,17 @@ function startTimer() {
 
     document.getElementById("timer").innerText = "00:0" + time;
 
-    updateUI(); // ←感情更新
-
     if (time <= 0) {
       clearInterval(timer);
-      timer = null;
       complete();
     }
 
   }, 1000);
 }
 
-/* =========================
+/* =====================
    完了
-========================= */
+===================== */
 
 function complete() {
 
@@ -144,7 +125,9 @@ function complete() {
   today++;
   total++;
 
-  if (exp >= level * 100) level++;
+  if (exp >= level * 100) {
+    level++;
+  }
 
   localStorage.setItem("exp", exp);
   localStorage.setItem("level", level);
@@ -158,12 +141,11 @@ function complete() {
   showHome();
 }
 
-/* =========================
+/* =====================
    中断
-========================= */
+===================== */
 
 document.getElementById("stop-btn").onclick = () => {
   clearInterval(timer);
-  timer = null;
   showHome();
 };
