@@ -2,11 +2,14 @@ const home = document.getElementById("home");
 const timerScreen = document.getElementById("timer-screen");
 
 const monster = document.getElementById("monster");
+
 const expFill = document.getElementById("exp-fill");
 const expText = document.getElementById("exp");
+const needText = document.getElementById("need");
 const levelText = document.getElementById("level");
 
 const btn = document.getElementById("hourglass-btn");
+
 const bgm = document.getElementById("bgm");
 const finish = document.getElementById("finish");
 
@@ -15,6 +18,7 @@ let timer = null;
 
 let exp = 0;
 let level = 1;
+
 let today = 0;
 let total = 0;
 
@@ -31,7 +35,7 @@ btn.onclick = () => {
 };
 
 /* =====================
-   タイマー（10秒）
+   タイマー
 ===================== */
 
 function startTimer(){
@@ -61,22 +65,18 @@ function startTimer(){
 }
 
 /* =====================
-   完了（経験値処理）
+   完了
 ===================== */
 
 function complete(){
 
   bgm.pause();
 
-  const gain = 20;
+  let gain = 20;
 
   exp += gain;
   today++;
   total++;
-
-  /* =====================
-     レベルアップ判定
-  ===================== */
 
   let need = level * 100;
 
@@ -85,7 +85,7 @@ function complete(){
     exp -= need;
     level++;
 
-    levelUpEffect();
+    levelEffect();
   }
 
   updateUI();
@@ -102,12 +102,13 @@ function complete(){
 
 function updateUI(){
 
+  let need = level * 100;
+
   expText.innerText = exp;
+  needText.innerText = need;
   levelText.innerText = "Lv." + level;
 
-  let need = level * 100;
   let percent = (exp / need) * 100;
-
   expFill.style.width = percent + "%";
 
   document.getElementById("today").innerText = today;
@@ -118,11 +119,10 @@ function updateUI(){
    レベルアップ演出
 ===================== */
 
-function levelUpEffect(){
+function levelEffect(){
 
   monster.classList.add("level-up");
 
-  // 振動（対応ブラウザのみ）
   if(navigator.vibrate){
     navigator.vibrate([100,50,100]);
   }
