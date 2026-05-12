@@ -4,24 +4,16 @@ body{
   color:white;
   text-align:center;
   overflow:hidden;
-  transition:background 2s;
+  background:#0d0d0d;
 }
 
 /* =====================
-   強制非表示
+   非表示制御
 ===================== */
 
 .hidden{
   display:none !important;
 }
-
-/* =====================
-   昼夜
-===================== */
-
-body.day{ background:#1e2a3a; }
-body.afternoon{ background:#3a2a1e; }
-body.night{ background:#0b0f1a; }
 
 /* =====================
    光エフェクト
@@ -47,7 +39,7 @@ body::before{
 }
 
 /* =====================
-   ☁️ 雲2層
+   ☁️ 雲2層（IMG_0889.jpeg使用）
 ===================== */
 
 .cloud{
@@ -58,27 +50,29 @@ body::before{
   left:0;
   background-repeat:repeat-x;
   z-index:-2;
-  opacity:0.1;
-}
-
-.cloud-back{
-  background:url("assets/icons/cloud.png");
-  animation:slowCloud 140s linear infinite;
-  opacity:0.06;
-}
-
-.cloud-front{
-  background:url("assets/icons/cloud.png");
-  animation:fastCloud 70s linear infinite;
   opacity:0.12;
 }
 
-@keyframes slowCloud{
+/* 奥の雲 */
+.cloud-back{
+  background:url("assets/icons/IMG_0889.jpeg");
+  animation:cloudSlow 140s linear infinite;
+  opacity:0.06;
+}
+
+/* 手前の雲 */
+.cloud-front{
+  background:url("assets/icons/IMG_0889.jpeg");
+  animation:cloudFast 70s linear infinite;
+  opacity:0.12;
+}
+
+@keyframes cloudSlow{
   from{transform:translateX(0);}
   to{transform:translateX(-50%);}
 }
 
-@keyframes fastCloud{
+@keyframes cloudFast{
   from{transform:translateX(0);}
   to{transform:translateX(-80%);}
 }
@@ -96,7 +90,7 @@ body::before{
 }
 
 /* =====================
-   モンスター（呼吸＋影）
+   モンスター
 ===================== */
 
 #monster{
@@ -109,11 +103,6 @@ body::before{
   0%{transform:scale(1);}
   50%{transform:scale(1.05);}
   100%{transform:scale(1);}
-}
-
-/* 夜は影強化 */
-body.night #monster{
-  filter:drop-shadow(0 30px 30px rgba(0,0,0,0.9));
 }
 
 /* =====================
@@ -133,7 +122,6 @@ body.night #monster{
   width:0%;
   height:100%;
   background:linear-gradient(90deg,#4caf50,#8bc34a);
-  transition:0.3s;
 }
 
 /* =====================
@@ -161,10 +149,6 @@ body.night #monster{
 #hourglass-btn{
   width:150px;
   cursor:pointer;
-}
-
-#hourglass-btn:active{
-  transform:scale(0.95);
 }
 
 /* =====================
