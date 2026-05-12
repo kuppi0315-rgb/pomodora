@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>POMODORA</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,17 +10,15 @@
 <body>
 
 <!-- =====================
-   右上UI（画像ボタン）
+   右ナビ（機能）
 ===================== -->
 
-<div id="top-icons">
+<div id="side-icons">
 
-  <!-- 🏰 ギルド（画像差し替え前提） -->
   <a href="pages/guild.html">
     <img class="icon-img" src="assets/icons/guild.png">
   </a>
 
-  <!-- 🏆 ランキング -->
   <a href="pages/ranking.html">
     <img class="icon-img" src="assets/icons/trophy.png">
   </a>
@@ -29,33 +26,55 @@
 </div>
 
 <!-- =====================
-   ホーム
+   ロビー本体
 ===================== -->
 
-<div id="home">
+<div id="lobby">
 
+  <!-- タイトル -->
   <h1 id="logo">POMODORA</h1>
 
-  <img id="monster" src="assets/monsters/monster1.png">
+  <!-- モンスター（中央主役） -->
+  <div id="monster-area">
 
-  <h2 id="level">Lv.1</h2>
+    <img id="monster" src="assets/monsters/monster1.png">
 
-  <div id="exp-bar">
-    <div id="exp-fill"></div>
+    <h2 id="level">Lv.1</h2>
+
+    <!-- EXP -->
+    <div id="exp-bar">
+      <div id="exp-fill"></div>
+    </div>
+
+    <p>
+      EXP <span id="exp">0</span> / <span id="need">100</span>
+    </p>
+
   </div>
 
-  <p>EXP <span id="exp">0</span> / <span id="need">100</span></p>
+  <!-- ステータス -->
+  <div id="status">
+    今日 <span id="today">0</span> / 累計 <span id="total">0</span>
+  </div>
 
-  <p>今日 <span id="today">0</span> / 累計 <span id="total">0</span></p>
+  <!-- アクション（下部） -->
+  <div id="action">
 
-  <img id="hourglass-btn" src="assets/icons/hourglass.png">
+    <img id="hourglass-btn" src="assets/icons/hourglass.png">
+
+    <p>タップして集中開始</p>
+
+  </div>
 
 </div>
 
-<!-- タイマー -->
+<!-- =====================
+   タイマー
+===================== -->
+
 <div id="timer-screen" class="hidden">
 
-  <h1>集中中</h1>
+  <h1>集中モード</h1>
   <div id="timer">00:10</div>
   <button id="stop">中断</button>
 
