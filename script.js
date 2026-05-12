@@ -1,7 +1,8 @@
-const home = document.getElementById("home");
+const home = document.getElementById("lobby");
 const timerScreen = document.getElementById("timer-screen");
 
 const monster = document.getElementById("monster");
+
 const expFill = document.getElementById("exp-fill");
 const expText = document.getElementById("exp");
 const needText = document.getElementById("need");
@@ -22,12 +23,12 @@ let today = 0;
 let total = 0;
 
 /* =====================
-   砂時計クリック
+   開始
 ===================== */
 
 btn.onclick = () => {
 
-  home.classList.add("hidden");
+  document.getElementById("lobby").classList.add("hidden");
   timerScreen.classList.remove("hidden");
 
   startTimer();
@@ -39,11 +40,7 @@ btn.onclick = () => {
 
 function startTimer(){
 
-  clearInterval(timer);
-
   time = 10;
-
-  bgm.currentTime = 0;
   bgm.play();
 
   timer = setInterval(() => {
@@ -79,15 +76,14 @@ function complete(){
 
   if(exp >= need){
     exp -= need;
-    level++;
-    levelEffect();
+    levelUp();
   }
 
   updateUI();
 
   finish.play();
 
-  home.classList.remove("hidden");
+  document.getElementById("lobby").classList.remove("hidden");
   timerScreen.classList.add("hidden");
 }
 
@@ -110,20 +106,17 @@ function updateUI(){
 }
 
 /* =====================
-   レベルアップ演出
+   レベルアップ
 ===================== */
 
-function levelEffect(){
+function levelUp(){
 
-  monster.classList.add("level-up");
+  level++;
 
-  if(navigator.vibrate){
-    navigator.vibrate([100,50,100]);
-  }
-
-  setTimeout(() => {
-    monster.classList.remove("level-up");
-  }, 800);
+  monster.style.filter = "brightness(2)";
+  setTimeout(()=>{
+    monster.style.filter = "brightness(1)";
+  },500);
 }
 
 /* =====================
@@ -135,6 +128,6 @@ document.getElementById("stop").onclick = () => {
   clearInterval(timer);
   bgm.pause();
 
-  home.classList.remove("hidden");
+  document.getElementById("lobby").classList.remove("hidden");
   timerScreen.classList.add("hidden");
 };
