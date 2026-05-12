@@ -8,6 +8,14 @@ body{
 }
 
 /* =====================
+   強制非表示（バグ防止）
+===================== */
+
+.hidden{
+  display:none !important;
+}
+
+/* =====================
    🌅 昼夜背景
 ===================== */
 
@@ -24,7 +32,30 @@ body.night{
 }
 
 /* =====================
-   ☁️ 雲（2層）
+   🌟 背景光エフェクト
+===================== */
+
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  top:-50%;
+  left:-50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(76,175,80,0.12), transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(139,195,74,0.08), transparent 40%);
+  animation:lightMove 18s linear infinite;
+  z-index:-3;
+}
+
+@keyframes lightMove{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+/* =====================
+   ☁️ 雲2層（奥行き）
 ===================== */
 
 .cloud{
@@ -35,20 +66,20 @@ body.night{
   left:0;
   background-repeat:repeat-x;
   opacity:0.12;
-  z-index:-1;
+  z-index:-2;
 }
 
-/* 奥の雲（遅い） */
+/* 奥の雲（遅い・薄い） */
 .cloud-back{
   background:url("assets/icons/cloud.png");
-  animation:cloudSlow 120s linear infinite;
-  opacity:0.08;
+  animation:cloudSlow 140s linear infinite;
+  opacity:0.06;
 }
 
 /* 手前の雲（速い） */
 .cloud-front{
   background:url("assets/icons/cloud.png");
-  animation:cloudFast 60s linear infinite;
+  animation:cloudFast 70s linear infinite;
   opacity:0.12;
 }
 
@@ -75,37 +106,47 @@ body.night{
 }
 
 /* =====================
+   ロゴ
+===================== */
+
+#logo{
+  font-size:38px;
+  color:#4caf50;
+  margin-bottom:10px;
+}
+
+/* =====================
    モンスター（呼吸＋影）
 ===================== */
 
 #monster{
   width:280px;
   animation:breathe 3s ease-in-out infinite;
-  filter:drop-shadow(0 15px 10px rgba(0,0,0,0.5));
+  filter:drop-shadow(0 18px 12px rgba(0,0,0,0.5));
 }
 
 @keyframes breathe{
   0%{
     transform:scale(1);
-    filter:drop-shadow(0 15px 10px rgba(0,0,0,0.5));
+    filter:drop-shadow(0 18px 12px rgba(0,0,0,0.5));
   }
   50%{
     transform:scale(1.05);
-    filter:drop-shadow(0 25px 20px rgba(0,0,0,0.7));
+    filter:drop-shadow(0 28px 22px rgba(0,0,0,0.7));
   }
   100%{
     transform:scale(1);
-    filter:drop-shadow(0 15px 10px rgba(0,0,0,0.5));
+    filter:drop-shadow(0 18px 12px rgba(0,0,0,0.5));
   }
 }
 
 /* 夜は影強化 */
 body.night #monster{
-  filter:drop-shadow(0 25px 25px rgba(0,0,0,0.9));
+  filter:drop-shadow(0 30px 30px rgba(0,0,0,0.9));
 }
 
 /* =====================
-   EXP
+   EXPバー
 ===================== */
 
 #exp-bar{
@@ -121,10 +162,41 @@ body.night #monster{
   height:100%;
   width:0%;
   background:linear-gradient(90deg,#4caf50,#8bc34a);
+  transition:0.3s;
 }
 
 /* =====================
-   右ナビ
+   ステータス
+===================== */
+
+#status{
+  margin-top:10px;
+  opacity:0.8;
+}
+
+/* =====================
+   アクション（砂時計）
+===================== */
+
+#action{
+  position:absolute;
+  bottom:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+#hourglass-btn{
+  width:150px;
+  cursor:pointer;
+}
+
+#hourglass-btn:active{
+  transform:scale(0.95);
+}
+
+/* =====================
+   右ナビ（ギルド・ランキング）
 ===================== */
 
 #side-icons{
@@ -139,7 +211,9 @@ body.night #monster{
 
 .icon-img{
   width:52px;
+  height:52px;
   transition:0.2s;
+  cursor:pointer;
 }
 
 .icon-img:active{
@@ -147,23 +221,28 @@ body.night #monster{
 }
 
 /* =====================
-   アクション
+   タイマー画面
 ===================== */
 
-#action{
-  position:absolute;
-  bottom:40px;
+#timer-screen{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
-
-#hourglass-btn{
-  width:150px;
-}
-
-/* =====================
-   タイマー
-===================== */
 
 #timer{
   font-size:70px;
-  margin-top:40px;
+  margin-top:30px;
+}
+
+button{
+  padding:12px 24px;
+  margin-top:20px;
+  background:#4caf50;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
 }
