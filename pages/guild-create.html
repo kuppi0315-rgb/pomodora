@@ -1,1 +1,30 @@
+<input id="name">
+<select id="type">
+  <option value="public">public</option>
+  <option value="private">private</option>
+</select>
 
+<button onclick="create()">作成</button>
+
+<p id="out"></p>
+
+<script>
+function id(){
+  let s="";
+  for(let i=0;i<8;i++) s+=Math.floor(Math.random()*10);
+  return s;
+}
+
+function create(){
+  const g={
+    id:id(),
+    name:document.getElementById("name").value,
+    type:document.getElementById("type").value,
+    members:[],
+    total:0
+  };
+
+  localStorage.setItem("guild",JSON.stringify(g));
+  document.getElementById("out").innerText="ID:"+g.id;
+}
+</script>
