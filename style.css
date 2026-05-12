@@ -8,7 +8,7 @@ body{
 }
 
 /* =====================
-   強制非表示（バグ防止）
+   強制非表示
 ===================== */
 
 .hidden{
@@ -16,23 +16,15 @@ body{
 }
 
 /* =====================
-   🌅 昼夜背景
+   昼夜
 ===================== */
 
-body.day{
-  background:#1e2a3a;
-}
-
-body.afternoon{
-  background:#3a2a1e;
-}
-
-body.night{
-  background:#0b0f1a;
-}
+body.day{ background:#1e2a3a; }
+body.afternoon{ background:#3a2a1e; }
+body.night{ background:#0b0f1a; }
 
 /* =====================
-   🌟 背景光エフェクト
+   光エフェクト
 ===================== */
 
 body::before{
@@ -55,7 +47,7 @@ body::before{
 }
 
 /* =====================
-   ☁️ 雲2層（奥行き）
+   ☁️ 雲2層
 ===================== */
 
 .cloud{
@@ -65,30 +57,28 @@ body::before{
   top:0;
   left:0;
   background-repeat:repeat-x;
-  opacity:0.12;
   z-index:-2;
+  opacity:0.1;
 }
 
-/* 奥の雲（遅い・薄い） */
 .cloud-back{
   background:url("assets/icons/cloud.png");
-  animation:cloudSlow 140s linear infinite;
+  animation:slowCloud 140s linear infinite;
   opacity:0.06;
 }
 
-/* 手前の雲（速い） */
 .cloud-front{
   background:url("assets/icons/cloud.png");
-  animation:cloudFast 70s linear infinite;
+  animation:fastCloud 70s linear infinite;
   opacity:0.12;
 }
 
-@keyframes cloudSlow{
+@keyframes slowCloud{
   from{transform:translateX(0);}
   to{transform:translateX(-50%);}
 }
 
-@keyframes cloudFast{
+@keyframes fastCloud{
   from{transform:translateX(0);}
   to{transform:translateX(-80%);}
 }
@@ -106,16 +96,6 @@ body::before{
 }
 
 /* =====================
-   ロゴ
-===================== */
-
-#logo{
-  font-size:38px;
-  color:#4caf50;
-  margin-bottom:10px;
-}
-
-/* =====================
    モンスター（呼吸＋影）
 ===================== */
 
@@ -126,18 +106,9 @@ body::before{
 }
 
 @keyframes breathe{
-  0%{
-    transform:scale(1);
-    filter:drop-shadow(0 18px 12px rgba(0,0,0,0.5));
-  }
-  50%{
-    transform:scale(1.05);
-    filter:drop-shadow(0 28px 22px rgba(0,0,0,0.7));
-  }
-  100%{
-    transform:scale(1);
-    filter:drop-shadow(0 18px 12px rgba(0,0,0,0.5));
-  }
+  0%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+  100%{transform:scale(1);}
 }
 
 /* 夜は影強化 */
@@ -146,45 +117,46 @@ body.night #monster{
 }
 
 /* =====================
-   EXPバー
+   EXP
 ===================== */
 
 #exp-bar{
   width:260px;
   height:14px;
   background:#333;
-  margin:10px auto;
   border-radius:20px;
   overflow:hidden;
+  margin:10px auto;
 }
 
 #exp-fill{
-  height:100%;
   width:0%;
+  height:100%;
   background:linear-gradient(90deg,#4caf50,#8bc34a);
   transition:0.3s;
 }
 
 /* =====================
-   ステータス
+   右ナビ
 ===================== */
 
-#status{
-  margin-top:10px;
-  opacity:0.8;
+#side-icons{
+  position:fixed;
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.icon-img{
+  width:52px;
 }
 
 /* =====================
-   アクション（砂時計）
+   砂時計
 ===================== */
-
-#action{
-  position:absolute;
-  bottom:40px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
 
 #hourglass-btn{
   width:150px;
@@ -196,32 +168,7 @@ body.night #monster{
 }
 
 /* =====================
-   右ナビ（ギルド・ランキング）
-===================== */
-
-#side-icons{
-  position:fixed;
-  top:50%;
-  right:15px;
-  transform:translateY(-50%);
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-
-.icon-img{
-  width:52px;
-  height:52px;
-  transition:0.2s;
-  cursor:pointer;
-}
-
-.icon-img:active{
-  transform:scale(0.9);
-}
-
-/* =====================
-   タイマー画面
+   タイマー
 ===================== */
 
 #timer-screen{
@@ -234,15 +181,12 @@ body.night #monster{
 
 #timer{
   font-size:70px;
-  margin-top:30px;
 }
 
 button{
   padding:12px 24px;
-  margin-top:20px;
-  background:#4caf50;
-  color:white;
   border:none;
   border-radius:10px;
-  cursor:pointer;
+  background:#4caf50;
+  color:white;
 }
