@@ -1,30 +1,60 @@
-<input id="name">
-<select id="type">
-  <option value="public">public</option>
-  <option value="private">private</option>
-</select>
+<!DOCTYPE html>
+<html>
 
-<button onclick="create()">作成</button>
+<head>
+  <meta charset="UTF-8">
+  <title>Guild Create</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
 
-<p id="out"></p>
+<body>
+
+<div id="guild-screen">
+
+  <h1>ギルド作成</h1>
+
+  <div class="guild-card">
+
+    <input id="guild-name" placeholder="ギルド名">
+
+    <select id="guild-type">
+      <option value="public">パブリック（誰でも参加可）</option>
+      <option value="private">プライベート（ID制）</option>
+    </select>
+
+    <button class="guild-btn" onclick="createGuild()">
+      ギルドを作成
+    </button>
+
+    <p id="result"></p>
+
+  </div>
+
+</div>
 
 <script>
-function id(){
-  let s="";
-  for(let i=0;i<8;i++) s+=Math.floor(Math.random()*10);
-  return s;
+function randomId(){
+  let id="";
+  for(let i=0;i<8;i++) id+=Math.floor(Math.random()*10);
+  return id;
 }
 
-function create(){
+function createGuild(){
   const g={
-    id:id(),
-    name:document.getElementById("name").value,
-    type:document.getElementById("type").value,
+    id:randomId(),
+    name:document.getElementById("guild-name").value,
+    type:document.getElementById("guild-type").value,
     members:[],
     total:0
   };
 
   localStorage.setItem("guild",JSON.stringify(g));
-  document.getElementById("out").innerText="ID:"+g.id;
+
+  document.getElementById("result").innerText =
+    "作成完了 ID: " + g.id;
 }
 </script>
+
+</body>
+
+</html>
