@@ -3,54 +3,47 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>POMODORA</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div id="home">
+<a id="guild-icon" href="pages/guild.html">🏰</a>
 
-    <h1 id="logo">POMODORA</h1>
+<div id="home">
 
-    <!-- 🐉 モンスター（大きく） -->
-    <img id="monster" src="assets/monsters/monster1.png">
+  <h1 id="logo">POMODORA</h1>
 
-    <h2 id="level">Lv.1</h2>
+  <img id="monster" src="assets/monsters/monster1.png">
 
-    <!-- 📊 EXPバー復活 -->
-    <div id="exp-bar">
-      <div id="exp-fill"></div>
-    </div>
+  <h2 id="level">Lv.1</h2>
 
-    <p>
-      EXP <span id="exp">0</span> / <span id="need">100</span>
-    </p>
-
-    <p>
-      今日 <span id="today">0</span> / 累計 <span id="total">0</span>
-    </p>
-
-    <img id="hourglass-btn" src="assets/icons/hourglass.png">
-
+  <div id="exp-bar">
+    <div id="exp-fill"></div>
   </div>
 
-  <!-- タイマー -->
-  <div id="timer-screen" class="hidden">
+  <p>EXP <span id="exp">0</span> / <span id="need">100</span></p>
 
-    <h1>集中中</h1>
+  <p>今日 <span id="today">0</span> / 累計 <span id="total">0</span></p>
 
-    <div id="timer">00:10</div>
+  <img id="hourglass-btn" src="assets/icons/hourglass.png">
 
-    <button id="stop">中断</button>
+</div>
 
-  </div>
+<!-- タイマー -->
+<div id="timer-screen" class="hidden">
 
-  <audio id="bgm" src="assets/sounds/timer.mp3" loop></audio>
-  <audio id="finish" src="assets/sounds/finish.mp3"></audio>
+  <h1>集中中</h1>
+  <div id="timer">00:10</div>
+  <button id="stop">中断</button>
 
-  <script src="script.js"></script>
+</div>
+
+<audio id="bgm" src="assets/sounds/timer.mp3" loop></audio>
+<audio id="finish" src="assets/sounds/finish.mp3"></audio>
+
+<script src="script.js"></script>
 
 </body>
 
