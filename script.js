@@ -2,7 +2,6 @@ const lobby = document.getElementById("lobby");
 const timerScreen = document.getElementById("timer-screen");
 
 const btn = document.getElementById("hourglass-btn");
-
 const timerText = document.getElementById("timer");
 
 const bgm = document.getElementById("bgm");
@@ -12,7 +11,16 @@ let time = 10;
 let timer = null;
 
 /* =====================
-   クリックで必ず発火
+   初期化（超重要）
+===================== */
+
+window.onload = () => {
+  timerScreen.classList.add("hidden");
+  lobby.classList.remove("hidden");
+};
+
+/* =====================
+   砂時計クリックのみ起動
 ===================== */
 
 btn.addEventListener("click", () => {
@@ -20,12 +28,10 @@ btn.addEventListener("click", () => {
 });
 
 /* =====================
-   集中開始（画面切替）
+   集中開始
 ===================== */
 
 function startFocus(){
-
-  console.log("start"); // デバッグ用
 
   lobby.classList.add("hidden");
   timerScreen.classList.remove("hidden");
@@ -51,7 +57,7 @@ function startFocus(){
 }
 
 /* =====================
-   完了処理
+   完了
 ===================== */
 
 function finishFocus(){
@@ -61,10 +67,6 @@ function finishFocus(){
 
   timerScreen.classList.add("hidden");
   lobby.classList.remove("hidden");
-
-  // 仮EXP加算
-  const exp = document.getElementById("exp");
-  exp.innerText = Number(exp.innerText) + 20;
 }
 
 /* =====================
