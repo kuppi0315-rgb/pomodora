@@ -1,43 +1,81 @@
-const monster = document.getElementById("monster");
-const expFill = document.getElementById("exp-fill");
+const lobby = document.getElementById("lobby");
+const timerScreen = document.getElementById("timer-screen");
 
-let exp=0,level=1;
+const btn = document.getElementById("hourglass-btn");
 
-/* =====================
-   昼夜サイクル（背景＋雲色制御）
-===================== */
+const timerText = document.getElementById("timer");
 
-function updateTimeTheme(){
-  const h=new Date().getHours();
+const bgm = document.getElementById("bgm");
+const finish = document.getElementById("finish");
 
-  document.body.classList.remove("day","afternoon","night");
-
-  if(h>=6 && h<12){
-    document.body.classList.add("day");
-  }else if(h>=12 && h<18){
-    document.body.classList.add("afternoon");
-  }else{
-    document.body.classList.add("night");
-  }
-}
-
-setInterval(updateTimeTheme,60000);
-updateTimeTheme();
+let time = 10;
+let timer = null;
 
 /* =====================
-   EXP処理（仮）
+   クリックで必ず発火
 ===================== */
 
-function addExp(val){
+btn.addEventListener("click", () => {
+  startFocus();
+});
 
-  exp+=val;
+/* =====================
+   集中開始（画面切替）
+===================== */
 
-  let need=level*100;
+function startFocus(){
 
-  if(exp>=need){
-    exp-=need;
-    level++;
-  }
+  console.log("start"); // デバッグ用
 
-  expFill.style.width=(exp/need)*100+"%";
+  lobby.classList.add("hidden");
+  timerScreen.classList.remove("hidden");
+
+  time = 10;
+
+  bgm.currentTime = 0;
+  bgm.play();
+
+  timer = setInterval(() => {
+
+    time--;
+
+    timerText.innerText =
+      "00:" + String(time).padStart(2,"0");
+
+    if(time <= 0){
+      clearInterval(timer);
+      finishFocus();
+    }
+
+  },1000);
 }
+
+/* =====================
+   完了処理
+===================== */
+
+function finishFocus(){
+
+  bgm.pause();
+  finish.play();
+
+  timerScreen.classList.add("hidden");
+  lobby.classList.remove("hidden");
+
+  // 仮EXP加算
+  const exp = document.getElementById("exp");
+  exp.innerText = Number(exp.innerText) + 20;
+}
+
+/* =====================
+   中断
+===================== */
+
+document.getElementById("stop").addEventListener("click", () => {
+
+  clearInterval(timer);
+  bgm.pause();
+
+  timerScreen.classList.add("hidden");
+  lobby.classList.remove("hidden");
+});
