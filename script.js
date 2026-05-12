@@ -2,7 +2,6 @@ const home = document.getElementById("home");
 const timerScreen = document.getElementById("timer-screen");
 
 const monster = document.getElementById("monster");
-
 const expFill = document.getElementById("exp-fill");
 const expText = document.getElementById("exp");
 const needText = document.getElementById("need");
@@ -44,8 +43,6 @@ function startTimer(){
 
   time = 10;
 
-  document.getElementById("timer").innerText = "00:10";
-
   bgm.currentTime = 0;
   bgm.play();
 
@@ -81,10 +78,8 @@ function complete(){
   let need = level * 100;
 
   if(exp >= need){
-
     exp -= need;
     level++;
-
     levelEffect();
   }
 
@@ -108,8 +103,7 @@ function updateUI(){
   needText.innerText = need;
   levelText.innerText = "Lv." + level;
 
-  let percent = (exp / need) * 100;
-  expFill.style.width = percent + "%";
+  expFill.style.width = (exp / need) * 100 + "%";
 
   document.getElementById("today").innerText = today;
   document.getElementById("total").innerText = total;
