@@ -1,44 +1,90 @@
 body{
   margin:0;
-  background:radial-gradient(circle at center,#1a1a1a,#0d0d0d);
-  color:white;
   font-family:sans-serif;
+  color:white;
   text-align:center;
+  overflow:hidden;
+  transition:background 2s;
 }
 
 /* =====================
-   ロビー全体
+   背景（昼夜サイクル）
+===================== */
+
+body.day{
+  background:#1e2a3a;
+}
+
+body.afternoon{
+  background:#2a1e1e;
+}
+
+body.night{
+  background:#0b0f1a;
+}
+
+/* 光エフェクト */
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  top:-50%;
+  left:-50%;
+  background:radial-gradient(circle,rgba(76,175,80,0.1),transparent 40%);
+  animation:lightMove 15s linear infinite;
+  z-index:-2;
+}
+
+@keyframes lightMove{
+  0%{transform:rotate(0);}
+  100%{transform:rotate(360deg);}
+}
+
+/* =====================
+   雲
+===================== */
+
+.cloud{
+  position:fixed;
+  width:200%;
+  height:100%;
+  background:url("assets/icons/cloud.png") repeat-x;
+  opacity:0.08;
+  animation:cloudMove 80s linear infinite;
+  z-index:-1;
+}
+
+@keyframes cloudMove{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* =====================
+   ロビー
 ===================== */
 
 #lobby{
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  height:100vh;
 }
 
 /* =====================
-   タイトル
+   モンスター（呼吸）
 ===================== */
-
-#logo{
-  font-size:38px;
-  color:#4caf50;
-  margin-bottom:10px;
-}
-
-/* =====================
-   モンスター領域（中央）
-===================== */
-
-#monster-area{
-  margin-top:10px;
-}
 
 #monster{
   width:280px;
-  transition:0.3s;
+  animation:breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+  100%{transform:scale(1);}
 }
 
 /* =====================
@@ -61,36 +107,6 @@ body{
 }
 
 /* =====================
-   ステータス
-===================== */
-
-#status{
-  margin-top:10px;
-  opacity:0.8;
-}
-
-/* =====================
-   アクション（下部）
-===================== */
-
-#action{
-  position:absolute;
-  bottom:40px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-#hourglass-btn{
-  width:150px;
-  cursor:pointer;
-}
-
-#hourglass-btn:active{
-  transform:scale(0.95);
-}
-
-/* =====================
    右ナビ
 ===================== */
 
@@ -106,14 +122,35 @@ body{
 
 .icon-img{
   width:52px;
-  height:52px;
+  transition:0.2s;
+}
+
+.icon-img:active{
+  transform:scale(0.9);
 }
 
 /* =====================
-   タイマー
+   アクション
 ===================== */
 
-#timer{
-  font-size:70px;
-  margin-top:40px;
+#action{
+  position:absolute;
+  bottom:40px;
+}
+
+#hourglass-btn{
+  width:150px;
+}
+
+/* =====================
+   ランキング演出（光）
+===================== */
+
+.rank-glow{
+  animation:glow 1s infinite alternate;
+}
+
+@keyframes glow{
+  from{filter:brightness(1);}
+  to{filter:brightness(1.8) drop-shadow(0 0 10px #4caf50);}
 }
