@@ -11,18 +11,25 @@
 <body>
 
 <!-- =====================
-   右上アイコン（ギルド＋ランキング）
+   右上UI（画像ボタン）
 ===================== -->
 
 <div id="top-icons">
 
-  <a class="icon-btn" href="pages/guild.html">🏰</a>
-  <a class="icon-btn" href="pages/ranking.html">🏆</a>
+  <!-- 🏰 ギルド（画像差し替え前提） -->
+  <a href="pages/guild.html">
+    <img class="icon-img" src="assets/icons/guild.png">
+  </a>
+
+  <!-- 🏆 ランキング -->
+  <a href="pages/ranking.html">
+    <img class="icon-img" src="assets/icons/trophy.png">
+  </a>
 
 </div>
 
 <!-- =====================
-   ホーム画面
+   ホーム
 ===================== -->
 
 <div id="home">
@@ -33,41 +40,26 @@
 
   <h2 id="level">Lv.1</h2>
 
-  <!-- EXPバー -->
   <div id="exp-bar">
     <div id="exp-fill"></div>
   </div>
 
-  <p>
-    EXP <span id="exp">0</span> / <span id="need">100</span>
-  </p>
+  <p>EXP <span id="exp">0</span> / <span id="need">100</span></p>
 
-  <p>
-    今日 <span id="today">0</span> / 累計 <span id="total">0</span>
-  </p>
+  <p>今日 <span id="today">0</span> / 累計 <span id="total">0</span></p>
 
-  <!-- 砂時計 -->
   <img id="hourglass-btn" src="assets/icons/hourglass.png">
 
 </div>
 
-<!-- =====================
-   タイマー画面
-===================== -->
-
+<!-- タイマー -->
 <div id="timer-screen" class="hidden">
 
   <h1>集中中</h1>
-
   <div id="timer">00:10</div>
-
   <button id="stop">中断</button>
 
 </div>
-
-<!-- =====================
-   音
-===================== -->
 
 <audio id="bgm" src="assets/sounds/timer.mp3" loop></audio>
 <audio id="finish" src="assets/sounds/finish.mp3"></audio>
