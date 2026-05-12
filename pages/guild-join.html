@@ -1,1 +1,17 @@
+<input id="gid">
+<button onclick="join()">参加</button>
 
+<p id="msg"></p>
+
+<script>
+function join(){
+  const g=JSON.parse(localStorage.getItem("guild"));
+  const id=document.getElementById("gid").value;
+
+  if(g && g.id===id){
+    document.getElementById("msg").innerText="参加成功";
+  }else{
+    document.getElementById("msg").innerText="失敗";
+  }
+}
+</script>
