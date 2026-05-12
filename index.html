@@ -9,7 +9,7 @@
 
 <body>
 
-<!-- ☁️ 雲レイヤー（2層） -->
+<!-- ☁️ 雲 -->
 <div class="cloud cloud-back"></div>
 <div class="cloud cloud-front"></div>
 
@@ -26,41 +26,45 @@
 
 </div>
 
-<!-- ロビー -->
+<!-- =====================
+   ロビー画面
+===================== -->
+
 <div id="lobby">
 
   <h1 id="logo">POMODORA</h1>
 
-  <div id="monster-area">
+  <img id="monster" src="assets/monsters/monster1.png">
 
-    <img id="monster" src="assets/monsters/monster1.png">
+  <h2 id="level">Lv.1</h2>
 
-    <h2 id="level">Lv.1</h2>
-
-    <div id="exp-bar">
-      <div id="exp-fill"></div>
-    </div>
-
-    <p>EXP <span id="exp">0</span> / <span id="need">100</span></p>
-
+  <div id="exp-bar">
+    <div id="exp-fill"></div>
   </div>
 
-  <div id="status">
-    今日 <span id="today">0</span> / 累計 <span id="total">0</span>
-  </div>
+  <p>EXP <span id="exp">0</span> / <span id="need">100</span></p>
 
-  <div id="action">
-    <img id="hourglass-btn" src="assets/icons/hourglass.png">
-    <p>タップして集中</p>
-  </div>
+  <p>今日 <span id="today">0</span> / 累計 <span id="total">0</span></p>
+
+  <!-- ★クリック対象 -->
+  <img id="hourglass-btn" src="assets/icons/hourglass.png">
+
+  <p>タップして集中開始</p>
 
 </div>
 
-<!-- タイマー -->
+<!-- =====================
+   タイマー画面（別レイヤー）
+===================== -->
+
 <div id="timer-screen" class="hidden">
+
   <h1>集中モード</h1>
+
   <div id="timer">00:10</div>
+
   <button id="stop">中断</button>
+
 </div>
 
 <audio id="bgm" src="assets/sounds/timer.mp3" loop></audio>
