@@ -3,13 +3,27 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>POMODORA</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<a id="guild-icon" href="pages/guild.html">🏰</a>
+<!-- =====================
+   右上アイコン（ギルド＋ランキング）
+===================== -->
+
+<div id="top-icons">
+
+  <a class="icon-btn" href="pages/guild.html">🏰</a>
+  <a class="icon-btn" href="pages/ranking.html">🏆</a>
+
+</div>
+
+<!-- =====================
+   ホーム画面
+===================== -->
 
 <div id="home">
 
@@ -19,26 +33,41 @@
 
   <h2 id="level">Lv.1</h2>
 
+  <!-- EXPバー -->
   <div id="exp-bar">
     <div id="exp-fill"></div>
   </div>
 
-  <p>EXP <span id="exp">0</span> / <span id="need">100</span></p>
+  <p>
+    EXP <span id="exp">0</span> / <span id="need">100</span>
+  </p>
 
-  <p>今日 <span id="today">0</span> / 累計 <span id="total">0</span></p>
+  <p>
+    今日 <span id="today">0</span> / 累計 <span id="total">0</span>
+  </p>
 
+  <!-- 砂時計 -->
   <img id="hourglass-btn" src="assets/icons/hourglass.png">
 
 </div>
 
-<!-- タイマー -->
+<!-- =====================
+   タイマー画面
+===================== -->
+
 <div id="timer-screen" class="hidden">
 
   <h1>集中中</h1>
+
   <div id="timer">00:10</div>
+
   <button id="stop">中断</button>
 
 </div>
+
+<!-- =====================
+   音
+===================== -->
 
 <audio id="bgm" src="assets/sounds/timer.mp3" loop></audio>
 <audio id="finish" src="assets/sounds/finish.mp3"></audio>
