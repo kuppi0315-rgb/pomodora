@@ -3,16 +3,17 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>POMODORA</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =====================
-   右ナビ（機能）
-===================== -->
+<!-- 背景レイヤー -->
+<div class="cloud"></div>
 
+<!-- 右ナビ -->
 <div id="side-icons">
 
   <a href="pages/guild.html">
@@ -25,53 +26,37 @@
 
 </div>
 
-<!-- =====================
-   ロビー本体
-===================== -->
-
+<!-- ロビー -->
 <div id="lobby">
 
-  <!-- タイトル -->
   <h1 id="logo">POMODORA</h1>
 
-  <!-- モンスター（中央主役） -->
   <div id="monster-area">
 
     <img id="monster" src="assets/monsters/monster1.png">
 
     <h2 id="level">Lv.1</h2>
 
-    <!-- EXP -->
     <div id="exp-bar">
       <div id="exp-fill"></div>
     </div>
 
-    <p>
-      EXP <span id="exp">0</span> / <span id="need">100</span>
-    </p>
+    <p>EXP <span id="exp">0</span> / <span id="need">100</span></p>
 
   </div>
 
-  <!-- ステータス -->
   <div id="status">
     今日 <span id="today">0</span> / 累計 <span id="total">0</span>
   </div>
 
-  <!-- アクション（下部） -->
   <div id="action">
-
     <img id="hourglass-btn" src="assets/icons/hourglass.png">
-
-    <p>タップして集中開始</p>
-
+    <p>タップして集中</p>
   </div>
 
 </div>
 
-<!-- =====================
-   タイマー
-===================== -->
-
+<!-- タイマー -->
 <div id="timer-screen" class="hidden">
 
   <h1>集中モード</h1>
