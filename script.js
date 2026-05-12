@@ -1,133 +1,49 @@
-const home = document.getElementById("lobby");
-const timerScreen = document.getElementById("timer-screen");
-
 const monster = document.getElementById("monster");
-
 const expFill = document.getElementById("exp-fill");
-const expText = document.getElementById("exp");
-const needText = document.getElementById("need");
-const levelText = document.getElementById("level");
 
-const btn = document.getElementById("hourglass-btn");
-
-const bgm = document.getElementById("bgm");
-const finish = document.getElementById("finish");
-
-let time = 10;
-let timer = null;
-
-let exp = 0;
-let level = 1;
-
-let today = 0;
-let total = 0;
+let exp=0,level=1;
 
 /* =====================
-   開始
+   昼夜サイクル
 ===================== */
 
-btn.onclick = () => {
+function updateTimeTheme(){
+  const h=new Date().getHours();
 
-  document.getElementById("lobby").classList.add("hidden");
-  timerScreen.classList.remove("hidden");
+  document.body.classList.remove("day","afternoon","night");
 
-  startTimer();
-};
+  if(h>=6 && h<12) document.body.classList.add("day");
+  else if(h>=12 && h<18) document.body.classList.add("afternoon");
+  else document.body.classList.add("night");
+}
+
+setInterval(updateTimeTheme,60000);
+updateTimeTheme();
 
 /* =====================
-   タイマー
+   ギルド参加判定
 ===================== */
 
-function startTimer(){
+const guild = JSON.parse(localStorage.getItem("guild"));
 
-  time = 10;
-  bgm.play();
-
-  timer = setInterval(() => {
-
-    time--;
-
-    document.getElementById("timer").innerText =
-      "00:" + String(time).padStart(2,"0");
-
-    if(time <= 0){
-      clearInterval(timer);
-      complete();
-    }
-
-  },1000);
+if(guild){
+  document.body.style.filter="hue-rotate(20deg)";
 }
 
 /* =====================
-   完了
+   EXP更新（簡易）
 ===================== */
 
-function complete(){
+function addExp(val){
 
-  bgm.pause();
+  exp+=val;
 
-  let gain = 20;
+  let need=level*100;
 
-  exp += gain;
-  today++;
-  total++;
-
-  let need = level * 100;
-
-  if(exp >= need){
-    exp -= need;
-    levelUp();
+  if(exp>=need){
+    exp-=need;
+    level++;
   }
 
-  updateUI();
-
-  finish.play();
-
-  document.getElementById("lobby").classList.remove("hidden");
-  timerScreen.classList.add("hidden");
+  expFill.style.width=(exp/need)*100+"%";
 }
-
-/* =====================
-   UI更新
-===================== */
-
-function updateUI(){
-
-  let need = level * 100;
-
-  expText.innerText = exp;
-  needText.innerText = need;
-  levelText.innerText = "Lv." + level;
-
-  expFill.style.width = (exp / need) * 100 + "%";
-
-  document.getElementById("today").innerText = today;
-  document.getElementById("total").innerText = total;
-}
-
-/* =====================
-   レベルアップ
-===================== */
-
-function levelUp(){
-
-  level++;
-
-  monster.style.filter = "brightness(2)";
-  setTimeout(()=>{
-    monster.style.filter = "brightness(1)";
-  },500);
-}
-
-/* =====================
-   中断
-===================== */
-
-document.getElementById("stop").onclick = () => {
-
-  clearInterval(timer);
-  bgm.pause();
-
-  document.getElementById("lobby").classList.remove("hidden");
-  timerScreen.classList.add("hidden");
-};
