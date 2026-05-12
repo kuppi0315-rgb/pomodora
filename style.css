@@ -8,7 +8,7 @@ body{
 }
 
 /* =====================
-   背景（昼夜サイクル）
+   🌅 昼夜背景
 ===================== */
 
 body.day{
@@ -16,48 +16,50 @@ body.day{
 }
 
 body.afternoon{
-  background:#2a1e1e;
+  background:#3a2a1e;
 }
 
 body.night{
   background:#0b0f1a;
 }
 
-/* 光エフェクト */
-body::before{
-  content:"";
-  position:fixed;
-  width:200%;
-  height:200%;
-  top:-50%;
-  left:-50%;
-  background:radial-gradient(circle,rgba(76,175,80,0.1),transparent 40%);
-  animation:lightMove 15s linear infinite;
-  z-index:-2;
-}
-
-@keyframes lightMove{
-  0%{transform:rotate(0);}
-  100%{transform:rotate(360deg);}
-}
-
 /* =====================
-   雲
+   ☁️ 雲（2層）
 ===================== */
 
 .cloud{
   position:fixed;
   width:200%;
   height:100%;
-  background:url("assets/icons/cloud.png") repeat-x;
-  opacity:0.08;
-  animation:cloudMove 80s linear infinite;
+  top:0;
+  left:0;
+  background-repeat:repeat-x;
+  opacity:0.12;
   z-index:-1;
 }
 
-@keyframes cloudMove{
+/* 奥の雲（遅い） */
+.cloud-back{
+  background:url("assets/icons/cloud.png");
+  animation:cloudSlow 120s linear infinite;
+  opacity:0.08;
+}
+
+/* 手前の雲（速い） */
+.cloud-front{
+  background:url("assets/icons/cloud.png");
+  animation:cloudFast 60s linear infinite;
+  opacity:0.12;
+}
+
+@keyframes cloudSlow{
   from{transform:translateX(0);}
   to{transform:translateX(-50%);}
+}
+
+@keyframes cloudFast{
+  from{transform:translateX(0);}
+  to{transform:translateX(-80%);}
 }
 
 /* =====================
@@ -73,18 +75,33 @@ body::before{
 }
 
 /* =====================
-   モンスター（呼吸）
+   モンスター（呼吸＋影）
 ===================== */
 
 #monster{
   width:280px;
   animation:breathe 3s ease-in-out infinite;
+  filter:drop-shadow(0 15px 10px rgba(0,0,0,0.5));
 }
 
 @keyframes breathe{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.05);}
-  100%{transform:scale(1);}
+  0%{
+    transform:scale(1);
+    filter:drop-shadow(0 15px 10px rgba(0,0,0,0.5));
+  }
+  50%{
+    transform:scale(1.05);
+    filter:drop-shadow(0 25px 20px rgba(0,0,0,0.7));
+  }
+  100%{
+    transform:scale(1);
+    filter:drop-shadow(0 15px 10px rgba(0,0,0,0.5));
+  }
+}
+
+/* 夜は影強化 */
+body.night #monster{
+  filter:drop-shadow(0 25px 25px rgba(0,0,0,0.9));
 }
 
 /* =====================
@@ -143,14 +160,10 @@ body::before{
 }
 
 /* =====================
-   ランキング演出（光）
+   タイマー
 ===================== */
 
-.rank-glow{
-  animation:glow 1s infinite alternate;
-}
-
-@keyframes glow{
-  from{filter:brightness(1);}
-  to{filter:brightness(1.8) drop-shadow(0 0 10px #4caf50);}
+#timer{
+  font-size:70px;
+  margin-top:40px;
 }
